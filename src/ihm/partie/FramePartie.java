@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 import controleur.Controleur;
 
@@ -17,19 +16,12 @@ public class FramePartie extends JFrame
 	private PanelJoueur      panelJoueurNoir ;
 	private PanelInformation panelInformation;
 
-	private PanelChat        panelChat;
+	// private PanelChat        panelChat;
 
 
 	public FramePartie(Controleur ctrl, String j1, String j2)
 	{
-		/*-------------------*/
-		/* Bordure du haut   */
-		/*-------------------*/
-		//Creation
-		PanelBordureHaut panel = new PanelBordureHaut(new BorderLayout(), ctrl, this);
-		
-		//Positionnement
-		this.add(panel, BorderLayout.NORTH);
+	
 
 		/*-----------------------*/
 		/* PRINCIPALE            */
@@ -44,28 +36,37 @@ public class FramePartie extends JFrame
 		this.setBackground(Color.BLACK);
 
 		this.setLayout(new BorderLayout());
+
+		/*-------------------*/
+		/* Bordure du haut   */
+		/*-------------------*/
+		//Creation
+		PanelBordureHaut panel = new PanelBordureHaut(new BorderLayout(), ctrl, this);
+		
+		//Positionnement
+		this.add(panel, BorderLayout.NORTH);
+
 		/*----------------*/
-		/* Création       */
+		/* Jeu            */
 		/*----------------*/
-		JPanel panelJeu       = new JPanel();
+		//Creation
+		JPanel panelJeu       = new JPanel(new BorderLayout());
 		this.panelPlateau     = new PanelPlateau    (this.ctrl);
 		this.panelJoueurBlanc = new PanelJoueur     (Color.WHITE, j1, this);
 		this.panelJoueurNoir  = new PanelJoueur     (Color.BLACK, j2, this);
 		this.panelInformation = new PanelInformation();
 
-		this.panelChat        = new panelChat();
+		// this.panelChat        = new panelChat();
 
-		/*----------------*/
-		/* Positionnement */
-		/*----------------*/
+		//Positionnement
 		panelJeu.add(this.panelPlateau    , BorderLayout.CENTER);
 		panelJeu.add(this.panelJoueurBlanc, BorderLayout.EAST  );
 		panelJeu.add(this.panelJoueurNoir , BorderLayout.WEST  );
 		panelJeu.add(this.panelInformation, BorderLayout.SOUTH );
 
 		this.add(panelJeu);
-
-		this.add(this.panelChat, BorderLayout.EAST);
+		
+		// this.add(this.panelChat, BorderLayout.EAST);
 
 		this.setVisible(true);
 	}	

@@ -96,11 +96,8 @@ public class Metier
 		if(p == null)
 			return ;
 
-		if(this.client.mouvementValide(this.cpt % 2))
-		{
-			System.out.println("mauvaise Couleur");
+		if(!this.client.mouvementValide(this.cpt % 2))
 			return;
-		}
 
 		Piece pManger = this.getPiece(ligDest, colDest);
 		if(pManger != null && p.getCoul() != pManger.getCoul() && p.deplacer(ligDest, colDest))
