@@ -16,7 +16,7 @@ public class FramePartie extends JFrame
 	private PanelJoueur      panelJoueurNoir ;
 	private PanelInformation panelInformation;
 
-	// private PanelChat        panelChat;
+	private PanelChat        panelChat;
 
 
 	public FramePartie(Controleur ctrl, String j1, String j2)
@@ -56,7 +56,7 @@ public class FramePartie extends JFrame
 		this.panelJoueurNoir  = new PanelJoueur     (Color.BLACK, j2, this);
 		this.panelInformation = new PanelInformation();
 
-		// this.panelChat        = new panelChat();
+		this.panelChat        = new PanelChat(ctrl);
 
 		//Positionnement
 		panelJeu.add(this.panelPlateau    , BorderLayout.CENTER);
@@ -66,7 +66,7 @@ public class FramePartie extends JFrame
 
 		this.add(panelJeu);
 		
-		// this.add(this.panelChat, BorderLayout.EAST);
+		this.add(this.panelChat, BorderLayout.EAST);
 
 		this.setVisible(true);
 	}	
