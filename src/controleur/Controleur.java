@@ -20,21 +20,30 @@ public class Controleur
 	private FrameHome   ihmHome;
 	private FramePartie ihmPartie;
 
+	/**
+	 * Constructeur du Controleur
+	 */
 	public Controleur()
 	{
 		this.metier    = new Metier(this);
 		this.ihmHome   = new FrameHome(this);
 		this.ihmPartie = null;
 	}
+	/*-------------*/
+	/*   RESEAUX   */
+	/*-------------*/
 
-	/*RESEAUX */
+	/**
+	 * Méthode pour creer un serveur
+	 * @param pseudo : pseudo du premier joueur
+	 */
 	public void creerServer(String pseudo)
 	{
 		if(this.registerName(pseudo))
 		{
-			this.metier.setJoueur(pseudo);
-			this.metier.creerServer();
-			this.metier.rejoindreServer("localhost", pseudo);
+			this.metier .setJoueur(pseudo);
+			this.metier .creerServer();
+			this.metier .rejoindreServer("localhost", pseudo);
 			this.ihmHome.dispose();
 			this.ihmHome = null;
 
@@ -44,6 +53,11 @@ public class Controleur
 		this.ihmPartie.setTitle("Echec : " + pseudo);
 	}
 
+	/**
+	 * Méthode pour rejoindre un serveur
+	 * @param pseudo : pseudo du joueur qui rejoint
+	 * @param ip     : ip du premier joueur (donc, du serveur)
+	 */
 	public void rejoindreServer(String pseudo, String ip)
 	{
 		if(this.registerName(pseudo))
@@ -63,19 +77,34 @@ public class Controleur
 		this.ihmPartie.setTitle("Echec : " + pseudo);
 	}
 
-	/*Deplacement */
+	/*-----------------*/
+	/*   DEPLACEMENT   */
+	/*-----------------*/
+
 	public void majPiece(int ligDep, int colDep, int ligDest, int colDest, boolean maj, int nbDeplacement)
 	{
 		this.metier.majPiece(ligDep, colDep, ligDest, colDest, maj, nbDeplacement);
 		this.ihmPartie.repaint();
 	}
 
+	/**
+	 * Méthode pour déplacer une piece d'une case, vers une autre
+	 * @param ligDep  : ligne   de départ
+	 * @param colDep  : colonne de départ
+	 * @param ligDest : ligne   de destination
+	 * @param colDest : colonne de destination
+	 */
 	public void deplacer(int ligDep, int colDep, int ligDest, int colDest)
 	{
 		this.ihmPartie.repaint();
 		this.metier.deplacer(ligDep, colDep, ligDest, colDest);
 	}
 
+	/**
+	 * 
+	 * @param username
+	 * @return
+	 */
 	public boolean registerName(String username)
 	{
 		if(username.equals(""))
