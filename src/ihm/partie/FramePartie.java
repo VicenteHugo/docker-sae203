@@ -1,0 +1,80 @@
+package ihm.partie;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.Border;
+
+import controleur.Controleur;
+
+public class FramePartie extends JFrame
+{
+	private Controleur       ctrl;
+
+	private PanelPlateau     panelPlateau    ;
+	private PanelJoueur      panelJoueurBlanc;
+	private PanelJoueur      panelJoueurNoir ;
+	private PanelInformation panelInformation;
+
+	private PanelChat        panelChat;
+
+
+	public FramePartie(Controleur ctrl, String j1, String j2)
+	{
+		/*-------------------*/
+		/* Bordure du haut   */
+		/*-------------------*/
+		//Creation
+		PanelBordureHaut panel = new PanelBordureHaut(new BorderLayout(), ctrl, this);
+		
+		//Positionnement
+		this.add(panel, BorderLayout.NORTH);
+
+		/*-----------------------*/
+		/* PRINCIPALE            */
+		/*-----------------------*/
+
+		this.setUndecorated(true);
+		this.ctrl = ctrl;
+		
+
+		this.setUndecorated(true);
+		this.setSize(Controleur.DIM_SCREEN);
+		this.setBackground(Color.BLACK);
+
+		this.setLayout(new BorderLayout());
+		/*----------------*/
+		/* Création       */
+		/*----------------*/
+		JPanel panelJeu       = new JPanel();
+		this.panelPlateau     = new PanelPlateau    (this.ctrl);
+		this.panelJoueurBlanc = new PanelJoueur     (Color.WHITE, j1, this);
+		this.panelJoueurNoir  = new PanelJoueur     (Color.BLACK, j2, this);
+		this.panelInformation = new PanelInformation();
+
+		this.panelChat        = new panelChat();
+
+		/*----------------*/
+		/* Positionnement */
+		/*----------------*/
+		panelJeu.add(this.panelPlateau    , BorderLayout.CENTER);
+		panelJeu.add(this.panelJoueurBlanc, BorderLayout.EAST  );
+		panelJeu.add(this.panelJoueurNoir , BorderLayout.WEST  );
+		panelJeu.add(this.panelInformation, BorderLayout.SOUTH );
+
+		this.add(panelJeu);
+
+		this.add(this.panelChat, BorderLayout.EAST);
+
+		this.setVisible(true);
+	}	
+
+	public void setPseudo(String pseudo1, String pseudo2)
+	{
+		this.panelJoueurBlanc.setPseudo(pseudo1);
+		this.panelJoueurNoir .setPseudo(pseudo2);
+	}
+
+	public int getWidhtPanelJoueur(){return this.panelJoueurNoir.getWidth();}
+}
