@@ -16,6 +16,7 @@ import controleur.Controleur;
 
 public class PanelBordureHaut extends JPanel
 {
+	private JLabel      title;
 	private FramePartie frame;
 
 	public PanelBordureHaut(BorderLayout lt, Controleur ctrl, FramePartie frame)
@@ -29,8 +30,8 @@ public class PanelBordureHaut extends JPanel
 		this.setOpaque(true);
 
 
-		JLabel lbl = new JLabel("Echec");
-		lbl.setForeground(Color.WHITE);
+		this.title = new JLabel("Echec");
+		this.title.setForeground(Color.WHITE);
 		
 		JPanel panel2 = new JPanel(new GridLayout(1,3));
 		JButton btnFermer = new JButton("X");
@@ -51,8 +52,8 @@ public class PanelBordureHaut extends JPanel
 		panel2.add(btnResize);
 		panel2.add(btnFermer);
 
-		this.add(lbl   , BorderLayout.WEST);
-		this.add(panel2, BorderLayout.EAST);
+		this.add(this.title, BorderLayout.WEST);
+		this.add(panel2    , BorderLayout.EAST);
 		
 		
 		//Activation
@@ -62,6 +63,17 @@ public class PanelBordureHaut extends JPanel
 
 		GereBordure gb = new GereBordure();
 		this.addMouseMotionListener(gb);
+	}
+
+	public void setTitle(String title)
+	{
+		if(title == null)
+		{
+			this.title.setText("");
+			return;
+		}
+
+		this.title.setText(title);
 	}
 
 	private class GereBordure extends MouseAdapter

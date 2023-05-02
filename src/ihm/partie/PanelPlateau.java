@@ -93,7 +93,6 @@ public class PanelPlateau extends JPanel
 		public void mouseReleased(MouseEvent e)
 		{
 			ctrl.deplacer(this.xDep - 2, this.yDep, (int) (Math.floor(e.getX() / (cote * 1.0))) - 2, (int) (Math.floor(e.getY() / (cote * 1.0))));
-			repaint();
 		}
 	}
 }

@@ -10,22 +10,21 @@ import controleur.Controleur;
 
 public class ClientToServer extends Thread
 {
-	private static int nbJoueur = 0;
-
 	private Controleur         ctrl;
 	private ObjectOutputStream oos;
 	private ObjectInputStream  ois;
 	private boolean            running;
 	private Socket             socket;
+	private Client             client;
 
 	private int                numJoueur;
 	
 
 
-	public ClientToServer(Controleur ctrl)
+	public ClientToServer(Controleur ctrl, Client client)
 	{
 		this.ctrl      = ctrl;
-		this.numJoueur  = 0;
+		this.client    = client;
 	}
 
 	public boolean connect(String ip, int port)
@@ -36,6 +35,8 @@ public class ClientToServer extends Thread
 
 			this.oos = new ObjectOutputStream(this.socket.getOutputStream());
 			this.ois = new ObjectInputStream (this.socket.getInputStream());
+
+			this.setNumJoueur();
 
 			this.running = true;
 		}
@@ -50,8 +51,22 @@ public class ClientToServer extends Thread
 
 	public void disconnect()
 	{
-		this.running = false;
-		try {this.socket.close();} catch (Exception e) {}
+		try 
+		{
+			oos.reset();
+			oos.writeObject("disconnect");
+			oos.flush();	
+		} catch (Exception e) {}
+	}
+
+	public void majNbDeplacement()
+	{
+		try 
+		{
+			oos.reset();
+			oos.writeObject("setNbDeplacement");
+			oos.flush();
+		} catch (Exception e) {}
 	}
 
 	public void sendMaj()
@@ -76,24 +91,36 @@ public class ClientToServer extends Thread
 		catch (Exception e){e.printStackTrace();}
 	}
 
-	public void sendMovement(int ligDep, int colDep, int ligDest, int colDest, boolean valide)
+	public void sendMovement(int ligDep, int colDep, int ligDest, int colDest, int coulPiece)
 	{
 		try
 		{
 			oos.reset();
 			oos.writeObject("newMovement");
-			oos.writeObject(ligDep + ":" + colDep + ":" + ligDest + ":" + colDest);
-			oos.writeObject(valide);
+			oos.writeObject(ligDep + ":" + colDep + ":" + ligDest + ":" + colDest + ":" + coulPiece);
 			oos.flush();
 		}
 		catch (Exception e){e.printStackTrace();}
 	}
 
+	public void setNumJoueur()
+	{
+		try 
+		{
+			oos.reset();
+			oos.writeObject("setNumJoueur");
+			oos.flush();	
+		} catch (Exception e) {}
+	}
+
+	public void setNbDeplacement(int nbDeplacement)
+	{
+		this.client.setNbDeplacement(nbDeplacement);
+	}
+
 	public int getNumJoueur() {return this.numJoueur;}
 
-	public boolean estJoueur(){return this.numJoueur == 0 && this.numJoueur == 1;}
-
-	public void setJoueur(){this.numJoueur = nbJoueur++;}
+	public boolean estJoueur(){return this.numJoueur == 0 || this.numJoueur == 1;}
 
 	@Override
 	public void run()
@@ -111,9 +138,11 @@ public class ClientToServer extends Thread
 					this.ctrl.maj(pseudo1, pseudo2);
 				}
 
+				if(command.equals("setNbDeplacement"))
+					this.setNbDeplacement((int)ois.readObject());
 
 				if(command.equals("disconnect"))
-					this.disconnect();
+					this.ctrl.fermer();
 
 				if(command.equals("usernameAccepted"))
 					JOptionPane.showMessageDialog(null, "Connexion établie");
@@ -121,7 +150,6 @@ public class ClientToServer extends Thread
 				if(command.equals("usernameRefused"))
 				{
 					JOptionPane.showMessageDialog(null, "Nom non valide");
-					this.disconnect();
 				}
 
 				if(this.estJoueur() && command.equals("newMovement"))
@@ -132,15 +160,20 @@ public class ClientToServer extends Thread
 					int colDep  = Integer.parseInt(out.split(":")[1]);
 					int ligDest = Integer.parseInt(out.split(":")[2]);
 					int colDest = Integer.parseInt(out.split(":")[3]);
+					int coulPiece = Integer.parseInt(out.split(":")[4]);
+					int nbDeplacement = Integer.parseInt(out.split(":")[5]);
 
-					this.ctrl.deplacer(ligDep, colDep, ligDest, colDest);
+					this.ctrl.majPiece(ligDep, colDep, ligDest, colDest, ! (this.numJoueur == coulPiece) , nbDeplacement);
 				}
 
-				if(command.equals("setJoueur"))
-					this.setJoueur();
+				if(command.equals("setNumJoueur"))
+					this.numJoueur = (int) ois.readObject();
 					
+
+				if(command.equals("disconnect"))
+					this.ctrl.terminer();
 			}
-			catch (Exception e){e.printStackTrace();this.disconnect();}
+			catch (Exception e){e.printStackTrace();this.ctrl.terminer();}
 		}
 	}
 }

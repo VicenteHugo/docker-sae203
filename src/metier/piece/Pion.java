@@ -36,9 +36,9 @@ public class Pion extends Piece
 	{
 		int coul = this.getCoul() == Piece.BLANC ? Piece.NOIR : Piece.BLANC;
 
-		int pas = this.getCoul() == Piece.BLANC ? 1 : -1;
+		int pas = this.getCoul() == Piece.NOIR ? 1 : -1;
 
-		if(nbDeplacement == 0 && this.getLig() == ligDest && this.getCol() + pas * 2 == colDest && this.estConfondu(Piece.metier.getLstPiece(coul), ligDest, colDest) == null)
+		if(nbDeplacement == 0 && this.getLig() == ligDest && this.getCol() + pas * 2 == colDest && this.estConfondu(Piece.metier.getLstPiece(Piece.BLANC), ligDest, colDest) == null && this.estConfondu(Piece.metier.getLstPiece(Piece.NOIR), ligDest, colDest) == null)
 		{
 			this.nbDeplacement++;
 			return true;

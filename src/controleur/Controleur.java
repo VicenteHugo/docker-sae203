@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import ihm.home.FrameHome;
 import ihm.partie.FramePartie;
 import metier.Metier;
@@ -39,6 +41,7 @@ public class Controleur
 			this.ihmPartie = new FramePartie(this, pseudo, null);
 			
 		}
+		this.ihmPartie.setTitle("Echec : " + pseudo);
 	}
 
 	public void rejoindreServer(String pseudo, String ip)
@@ -46,16 +49,27 @@ public class Controleur
 		if(this.registerName(pseudo))
 		{
 			this.metier.setJoueur(pseudo);
-			this.metier.rejoindreServer(ip, pseudo);
+			if(!this.metier.rejoindreServer(ip, pseudo))
+			{
+				JOptionPane.showMessageDialog(null, "Server introuvable");
+				return;
+			}
 
 			this.ihmHome.dispose();
 			this.ihmHome = null;
 
 			this.ihmPartie = new FramePartie(this, null, null);
 		}
+		this.ihmPartie.setTitle("Echec : " + pseudo);
 	}
 
 	/*Deplacement */
+	public void majPiece(int ligDep, int colDep, int ligDest, int colDest, boolean maj, int nbDeplacement)
+	{
+		this.metier.majPiece(ligDep, colDep, ligDest, colDest, maj, nbDeplacement);
+		this.ihmPartie.repaint();
+	}
+
 	public void deplacer(int ligDep, int colDep, int ligDest, int colDest)
 	{
 		this.ihmPartie.repaint();
@@ -72,11 +86,16 @@ public class Controleur
 
 
 	/*FRAME */
+	public void terminer()
+	{
+		JOptionPane.showMessageDialog(null, "Connexion perdue");
+		this.ihmPartie.dispose();
+		System.exit(0);
+	}
+
 	public void fermer()
 	{
 		this.metier.fermer();
-		this.ihmPartie.dispose();
-		System.exit(0);
 	}
 
 	public void maj(String pseudo1, String pseudo2)

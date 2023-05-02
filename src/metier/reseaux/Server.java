@@ -9,6 +9,10 @@ import controleur.Controleur;
 
 public class Server extends Thread
 {
+	public static int nbJoueur      = 0;
+	
+	private int nbDeplacement = 0;
+	
 	private ServerSocket         serverSocket;
 	private List<ServerToClient> lstServerToClient;
 	private Controleur           ctrl;	
@@ -16,6 +20,8 @@ public class Server extends Thread
 
 	private String               pseudoBlanc;
 	private String               pseudoNoir;
+
+
 
 	public Server(Controleur ctrl)
 	{
@@ -30,6 +36,15 @@ public class Server extends Thread
 		catch (Exception e){e.printStackTrace();}
 	}
 
+	public void disconnect()
+	{
+		this.lstServerToClient.get(0).disconnect();
+	}
+
+	public int getNbDeplacement(){return this.nbDeplacement;}
+
+	public int getNbJoueur(){return this.lstServerToClient.size();}
+
 	@Override
 	public void run()
 	{
@@ -42,16 +57,15 @@ public class Server extends Thread
 				
 				this.lstServerToClient.add(serverToClient);
 				serverToClient.start();	
-				if(this.lstServerToClient.size() < 3)
-					serverToClient.setJoueur();
 			} catch (Exception e) {e.printStackTrace();}
 		}
 	}
 
-	public void broadcastMovement(int ligDep, int colDep, int ligDest, int colDest)
+	public void broadcastMovement(int ligDep, int colDep, int ligDest, int colDest, int coulPiece)
 	{
+		this.nbDeplacement++;
 		for (ServerToClient serverToClient : lstServerToClient)
-			serverToClient.sendMovement(ligDep, colDep, ligDest, colDest);
+			serverToClient.sendMovement(ligDep, colDep, ligDest, colDest, coulPiece, this.nbDeplacement);
 	}
 
 	public void maj()
@@ -59,19 +73,6 @@ public class Server extends Thread
 		for (ServerToClient serverToClient : lstServerToClient)
 			serverToClient.maj(this.pseudoBlanc, this.pseudoNoir);
 	} 
-
-	public void closeServer()
-	{
-		for (ServerToClient serverToClient : lstServerToClient)
-			serverToClient.disconnect();
-
-		this.running = false;
-
-		try 
-		{
-			this.serverSocket.close();
-		} catch (Exception e) {e.printStackTrace();}
-	}
 
 	public Controleur getCtrl(){return this.ctrl;}
 

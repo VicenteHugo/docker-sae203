@@ -29,15 +29,11 @@ public class Metier
 	private List<Piece> lstPieceBlanche;
 	private List<Piece> lstPieceNoir   ;
 
-	private int cpt;
-
 	public Metier(Controleur ctrl)
 	{
 		this.ctrl = ctrl;
 		this.lstPieceBlanche = Metier.generePiece(Piece.BLANC);
 		this.lstPieceNoir    = Metier.generePiece(Piece.NOIR );
-		
-		this.cpt = 0;
 
 		Piece.setMetier(this);
 	}
@@ -54,30 +50,30 @@ public class Metier
 	private static List<Piece> generePiece(int coul)
 	{
 		List<Piece> lst = new ArrayList<Piece>();
-		int x   = coul == 0 ? 0 :  7;
-		int y   = coul == 0 ? 0 :  7;
-		int pas = coul == 0 ? 1 : -1;
+		int x   = 0;
+		int y   = coul == 1 ? 0 :  7;
+		int pas = coul == 1 ? 1 : -1;
 
 		lst.add(new Tour    (x, y, coul));
-		x+=pas;
+		x+=1;
 		lst.add(new Cavalier(x, y, coul));
-		x+=pas;
+		x+=1;
 		lst.add(new Fou     (x, y, coul));
-		x+=pas;
+		x+=1;
 		lst.add(new Reine   (x, y, coul));
-		x+=pas;
+		x+=1;
 		lst.add(new Roi     (x, y, coul));
-		x+=pas;
+		x+=1;
 		lst.add(new Fou     (x, y, coul));
-		x+=pas;
+		x+=1;
 		lst.add(new Cavalier(x, y, coul));
-		x+=pas;
+		x+=1;
 		lst.add(new Tour    (x, y, coul));
 
 		y+=pas;
 
 		for (int i = 0; i < 8; i++) 
-			lst.add(new Pion(x - (pas * i), y, coul));
+			lst.add(new Pion(x - (1 * i), y, coul));
 
 
 		return lst;
@@ -88,35 +84,55 @@ public class Metier
 		return coul == Piece.BLANC ? this.lstPieceBlanche : this.lstPieceNoir;
 	}
 
+	public void majPiece(int ligDep, int colDep, int ligDest, int colDest, boolean maj, int nbDeplacement)
+	{
+		this.client.setNbDeplacement(nbDeplacement);
+
+		if(!maj)
+			return;
+
+		Piece pManger = this.getPiece(ligDest, colDest);
+		if(pManger != null)
+			this.manger(pManger);
+			
+	
+	
+		Piece p = this.getPiece(ligDep, colDep);
+		if(p == null)
+			return;
+
+		p.deplacer(ligDest, colDest);
+	}
+
+
 	public void deplacer(int ligDep, int colDep, int ligDest, int colDest)
 	{
-
 		Piece p = this.getPiece(ligDep, colDep);
 		
 		if(p == null)
-			return ;
-
-		if(!this.client.mouvementValide(this.cpt % 2))
 			return;
+
+
+		if(!this.client.mouvementValide(p))
+			return;
+
 
 		Piece pManger = this.getPiece(ligDest, colDest);
 		if(pManger != null && p.getCoul() != pManger.getCoul() && p.deplacer(ligDest, colDest))
 		{
 			this.manger(pManger);
-			if(this.client.sendMovement(ligDep, colDep, ligDest, colDest, this.cpt % 2))
-				this.cpt++;
-
+			this.client.sendMovement(ligDep, colDep, ligDest, colDest, p.getCoul());
 			return;
 		}
 		
-		if(this.client.mouvementValide(this.cpt % 2) && p.deplacer(ligDest, colDest))
+		if(pManger == null && p.deplacer(ligDest, colDest))
 		{
-			if(this.client.sendMovement(ligDep, colDep, ligDest, colDest, this.cpt % 2))
-				this.cpt++;
+			this.client.sendMovement(ligDep, colDep, ligDest, colDest, p.getCoul());
+			return;
 		}
-	}
 
-	public void augmenterCpt(){this.cpt++;}
+		return;
+	}
 
 	public Piece getPiece(int lig, int col)
 	{
@@ -147,10 +163,10 @@ public class Metier
 		this.server.start();
 	}
 
-	public void rejoindreServer(String ip, String username)
+	public boolean rejoindreServer(String ip, String username)
 	{
 		this.client = new Client(this.ctrl);
-		this.client.connect(ip, 6666, username);
+		return this.client.connect(ip, 6666, username);
 	}
 
 	public void fermer()

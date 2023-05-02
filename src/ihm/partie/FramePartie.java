@@ -11,6 +11,8 @@ public class FramePartie extends JFrame
 {
 	private Controleur       ctrl;
 
+	private PanelBordureHaut panelBordure;
+
 	private PanelPlateau     panelPlateau    ;
 	private PanelJoueur      panelJoueurBlanc;
 	private PanelJoueur      panelJoueurNoir ;
@@ -41,10 +43,10 @@ public class FramePartie extends JFrame
 		/* Bordure du haut   */
 		/*-------------------*/
 		//Creation
-		PanelBordureHaut panel = new PanelBordureHaut(new BorderLayout(), ctrl, this);
+		this.panelBordure = new PanelBordureHaut(new BorderLayout(), ctrl, this);
 		
 		//Positionnement
-		this.add(panel, BorderLayout.NORTH);
+		this.add(this.panelBordure, BorderLayout.NORTH);
 
 		/*----------------*/
 		/* Jeu            */
@@ -70,6 +72,11 @@ public class FramePartie extends JFrame
 
 		this.setVisible(true);
 	}	
+
+	public void setTitle(String title)
+	{
+		this.panelBordure.setTitle(title);
+	}
 
 	public void setPseudo(String pseudo1, String pseudo2)
 	{

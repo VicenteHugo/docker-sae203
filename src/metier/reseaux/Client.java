@@ -1,25 +1,41 @@
 package metier.reseaux;
 
 import controleur.Controleur;
+import metier.piece.Piece;
 
 public class Client 
 {
+	private int nbDeplacement;
+
 	private ClientToServer clientToServer;
 
 	public Client(Controleur ctrl)
 	{
-		this.clientToServer = new ClientToServer(ctrl);
+		this.clientToServer = new ClientToServer(ctrl, this);
+		this.nbDeplacement  = 0;
 	}
 
-	public boolean sendMovement(int ligDep, int colDep, int ligDest, int colDest, int coul)
+	public int getNumJoueur(){return this.clientToServer.getNumJoueur();}
+
+	public void sendMovement(int ligDep, int colDep, int ligDest, int colDest, int coulPiece)
 	{
-		this.clientToServer.sendMovement(ligDep, colDep, ligDest, colDest, coul == this.clientToServer.getNumJoueur());
-		return coul == this.clientToServer.getNumJoueur();	
+		this.clientToServer.sendMovement(ligDep, colDep, ligDest, colDest, coulPiece);
 	}
 
-	public boolean mouvementValide(int coul)
+	public boolean mouvementValide(Piece p)
 	{
-		return coul == this.clientToServer.getNumJoueur();
+		System.out.println(this.nbDeplacement + "   " + this.clientToServer.getNumJoueur());
+		System.out.println(this.nbDeplacement + "   " + p.getCoul());
+		System.out.println();
+
+		return this.nbDeplacement % 2 == this.clientToServer.getNumJoueur() && p.getCoul() == this.nbDeplacement % 2 ;
+	}
+
+	public void setNbDeplacement(int nbDeplacement)
+	{
+		this.nbDeplacement = nbDeplacement;
+
+		System.out.println(this.nbDeplacement);
 	}
 
 	public void disconnect()
@@ -29,9 +45,6 @@ public class Client
 
 	public boolean connect(String ip, int port, String pseudo)
 	{
-		if(this.clientToServer.isAlive())
-			this.clientToServer.disconnect();
-
 		boolean success = this.clientToServer.connect(ip, port);
 
 		if(success)

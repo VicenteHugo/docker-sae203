@@ -23,24 +23,54 @@ public class ServerToClient extends Thread
 		} catch (Exception e) {e.printStackTrace();}
 	}
 
-	public Server getServer() {return this.server;}
-
 	public void disconnect()
 	{
-		this.running = false;
+		try 
+		{
+			oos.reset();
+			oos.writeObject("disconnect");
+			oos.flush();	
+		} catch (Exception e) {}
 	}
+
+	public Server getServer() {return this.server;}
 	
-	public void sendMovement(int ligDep, int colDep, int ligDest, int colDest)
+	public void setNumJoueur(int numJoueur)
 	{
 		try
 		{
 			oos.reset();
+			oos.writeObject("setNumJoueur");
+			oos.writeObject(numJoueur);
+			oos.flush();
+		}
+		catch(Exception e){}
+	}
+
+
+	public void sendMovement(int ligDep, int colDep, int ligDest, int colDest, int coulPiece, int nbDeplacement)
+	{
+		System.out.println(nbDeplacement);
+		try
+		{
+			oos.reset();
 			oos.writeObject("newMovement");
-			oos.writeObject(ligDep + ":" + colDep + ":" + ligDest + ":" + colDest);
+			oos.writeObject(ligDep + ":" + colDep + ":" + ligDest + ":" + colDest + ":" + coulPiece + ":" + nbDeplacement);
 			oos.flush();
 		}catch(Exception e){e.printStackTrace();}
 	}
 
+	public void setNbDeplacement(int nbDeplacement)
+	{
+		try
+		{
+			oos.reset();
+			oos.writeObject("setNbDeplacement");
+			oos.writeObject(nbDeplacement);
+			oos.flush();
+		}	
+		catch(Exception e){}
+	}
 
 	public void maj(String pseudo1, String pseudo2)
 	{
@@ -54,17 +84,6 @@ public class ServerToClient extends Thread
 		} catch (Exception e) {e.printStackTrace();}
 	}
 
-	public void setJoueur()
-	{
-		try
-		{	
-			System.out.println("estJoueur");
-			oos.reset();
-			oos.writeObject("setJoueur");
-			oos.flush();
-		}	
-		catch(Exception e){e.printStackTrace();}
-	}
 
 	@Override
 	public void run()
@@ -75,17 +94,14 @@ public class ServerToClient extends Thread
 			{
 				String command = (String)ois.readObject();
 
+				if(command.equals("setNbDeplacement"))
+					this.setNbDeplacement(this.server.getNbDeplacement());
+
 				if(command.equals("maj"))
 				{
-					System.out.println("maj");
 					this.server.maj();
 				}
 
-				if(command.equals("disconnect"))
-				{
-					this.disconnect();
-					break;
-				}
 
 				if(command.equals("setUsername"))
 				{
@@ -101,26 +117,28 @@ public class ServerToClient extends Thread
 					{
 						oos.writeObject("usernameRefused");
 						oos.flush();
-						this.disconnect();
 					}
 				}
 
 				if(command.equals("newMovement"))
 				{
-
 					String  out    = (String)ois.readObject();
-					boolean valide = (boolean)ois.readObject();
-
-					System.out.println(valide);
 
 					int ligDep  = Integer.parseInt(out.split(":")[0]);
 					int colDep  = Integer.parseInt(out.split(":")[1]);
 					int ligDest = Integer.parseInt(out.split(":")[2]);
 					int colDest = Integer.parseInt(out.split(":")[3]);
+					int coulPiece = Integer.parseInt(out.split(":")[4]);
 
-					if(valide)
-						this.server.broadcastMovement(ligDep, colDep, ligDest, colDest);
+					this.server.broadcastMovement(ligDep, colDep, ligDest, colDest, coulPiece);
+
 				}
+
+				if(command.equals("setNumJoueur"))
+					this.setNumJoueur(this.server.getNbJoueur() - 1);
+
+				if(command.equals("disconnect"))
+					this.server.disconnect();
 
 			} catch (Exception e) {}
 		}

@@ -45,7 +45,10 @@ public abstract class Piece
 	public boolean deplacer(int ligDest, int colDest)
 	{
 		if(ligDest > 7 || ligDest < 0 || colDest > 7 || colDest < 0)
+		{
 			return false;
+		}
+
 		if (this.peutDeplacer(ligDest, colDest))
 		{
 			this.lig = ligDest ;
