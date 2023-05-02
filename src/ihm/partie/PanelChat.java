@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -19,6 +20,8 @@ public class PanelChat extends JPanel implements ActionListener, KeyListener
 {
 	Controleur ctrl;
 
+	JFrame mere;
+
 	JPanel panelChat;
 	JPanel panelChaton;
 
@@ -27,17 +30,19 @@ public class PanelChat extends JPanel implements ActionListener, KeyListener
 
 	JTextArea  chat;
 
-	public PanelChat(Controleur ctrl)
+	public PanelChat(Controleur ctrl, JFrame mere)
 	{
 		this.ctrl = ctrl;
+		this.mere = mere;
 
 		this.panelChat   = new JPanel();
 		this.panelChaton = new JPanel();
 
-		this.messageEnvoi = new JTextField(20);
+		this.messageEnvoi = new JTextField(16);
 		this.envoie       = new JButton("Envoyer");
 
-		this.chat = new JTextArea(50, 30);
+		this.chat = new JTextArea();
+		this.chat.setEditable(false);
 		this.chat.setLineWrap(true);
 
 		JScrollPane scrollPane = new JScrollPane(chat);
@@ -49,6 +54,7 @@ public class PanelChat extends JPanel implements ActionListener, KeyListener
 		this.setLayout(new BorderLayout());
 
 		this.add(panelChat);
+		this.panelChat.setLayout(new BorderLayout());
 		this.panelChat.add(scrollPane);
 		this.panelChat.setBackground(Color.DARK_GRAY);
 
@@ -65,7 +71,7 @@ public class PanelChat extends JPanel implements ActionListener, KeyListener
 	{
 		if(!messageEnvoi.getText().equals(""))
 		{
-			this.chat.append(this.ctrl.getPseudo() + " : " + this.messageEnvoi.getText() + "\n");
+			this.ctrl.envoieMessage(this.ctrl.getPseudo() + " : " + this.messageEnvoi.getText() + "\n");
 			this.messageEnvoi.setText("");
 		}
 	}
@@ -74,11 +80,16 @@ public class PanelChat extends JPanel implements ActionListener, KeyListener
 	{
 		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Enter"))
 		{
-			this.chat.append(this.ctrl.getPseudo() + " : " + this.messageEnvoi.getText() + "\n");
+			this.ctrl.envoieMessage(this.ctrl.getPseudo() + " : " + this.messageEnvoi.getText() + "\n");
 			this.messageEnvoi.setText("");
 		}
 	}
 
 	public void keyTyped   (KeyEvent e) {}
 	public void keyReleased(KeyEvent e) {}
+
+	public void updateChat(String mess)
+	{
+		this.chat.append(mess);
+	}
 }

@@ -82,4 +82,10 @@ public class Server extends Thread
 		else if (this.pseudoNoir == null)
 			this.pseudoNoir = username;
 	}
+
+	public void broadcastMessage(String mess)
+	{
+		for (ServerToClient serverToClient : lstServerToClient)
+			serverToClient.sendMessage(mess);
+	}
 }

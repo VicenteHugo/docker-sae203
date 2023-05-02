@@ -122,8 +122,25 @@ public class ServerToClient extends Thread
 						this.server.broadcastMovement(ligDep, colDep, ligDest, colDest);
 				}
 
+				if(command.equals("newMessage"))
+				{
+					this.server.broadcastMessage((String)ois.readObject());
+				}
+
 			} catch (Exception e) {}
 		}
+	}
+
+	public void sendMessage(String mess)
+	{
+		try
+		{
+			oos.reset();
+			oos.writeObject("newMessage");
+			oos.writeObject(mess);
+			oos.flush();
+		}
+		catch (Exception e){e.printStackTrace();}
 	}
 
 }
