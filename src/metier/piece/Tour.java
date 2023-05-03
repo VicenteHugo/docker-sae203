@@ -4,9 +4,9 @@ public class Tour extends Piece
 {
 	/**
 	 * Constructeur de la Tour
-	 * @param lig    ligne   de la Tour.
-	 * @param col    colonne de la Tour.
-	 * @param metier permet d'obtenir la liste de pièce.
+	 * @param lig  : ligne   de la Tour.
+	 * @param col  : colonne de la Tour.
+	 * @param coul : couleur de la piece.
 	 */
 	public Tour(int lig, int col, int coul)
 	{
@@ -37,6 +37,10 @@ public class Tour extends Piece
 				!this.autresPieces(Piece.metier.getLstPiece(Piece.BLANC), Piece.metier.getLstPiece(Piece.NOIR), ligDest, colDest);
 	}
 
+	/**
+	 * Permet de connaître le symbole de la pièce.
+	 * @return le charactère symbolisant la pièce.
+	 */
 	@Override
 	public char getSymbole() {return 'T';}
 	

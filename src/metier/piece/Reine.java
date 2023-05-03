@@ -4,9 +4,9 @@ public class Reine extends Piece
 {
 	/**
 	 * Constructeur de la Reine
-	 * @param lig    ligne   de la Reine.
-	 * @param col    colonne de la Reine.
-	 * @param metier permet d'obtenir la liste de pièce.
+	 * @param lig  : ligne   de la Reine.
+	 * @param col  : colonne de la Reine.
+	 * @param coul : couleur de la piece.
 	 */
 	public Reine(int lig, int col, int coul)
 	{
@@ -41,5 +41,9 @@ public class Reine extends Piece
 				!this.autresPieces(Piece.metier.getLstPiece(Piece.BLANC), Piece.metier.getLstPiece(Piece.NOIR), ligDest, colDest);
 	}
 
+	/**
+	 * Permet de connaître le symbole de la pièce.
+	 * @return le charactère symbolisant la pièce.
+	 */
 	public char getSymbole(){return 'Q';}
 }

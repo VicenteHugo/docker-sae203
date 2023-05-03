@@ -6,9 +6,9 @@ public class Pion extends Piece
 	private int nbDeplacement = 0;
 	/**
 	 * Constructeur du Pion
-	 * @param lig    ligne   du Pion.
-	 * @param col    colonne du Pion.
-	 * @param metier permet d'obtenir la liste de pièce.
+	 * @param lig  : ligne   du Pion.
+	 * @param col  : colonne du Pion.
+	 * @param coul : couleur du pion
 	 */
 	public Pion(int lig, int col, int coul) 
 	{
@@ -64,6 +64,10 @@ public class Pion extends Piece
 		return false;
 	}
 
+	/**
+	 * Permet de connaître le symbole de la pièce.
+	 * @return le charactère symbolisant la pièce.
+	 */
 	@Override
 	public char getSymbole() {return 'P';}
 		

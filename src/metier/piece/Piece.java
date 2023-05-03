@@ -17,8 +17,9 @@ public abstract class Piece
 
 	/**
 	 * Constructeur de Piece
-	 * @param lig ligne   de la piece.
-	 * @param col colonne de la piece.
+	 * @param lig  : ligne   de la piece.
+	 * @param col  : colonne de la piece.
+	 * @param coul : couleur de la piece.
 	 */
 	public Piece(int lig, int col, int coul)
 	{		
@@ -61,7 +62,9 @@ public abstract class Piece
 
 	/**
 	 * Méthode pour déterminer si une piece est deja à la place de notre piece
-	 * @param lstPiece liste des pieces existantes.
+	 * @param lstPiece : liste des pieces existantes.
+	 * @param ligDest  : ligne   de destination
+	 * @param colDest  : colonne de destination
 	 * @return la piece avec laquelle nous sommes confondus.
 	 */
 	public Piece estConfondu(List<Piece> lstPiece, int ligDest, int colDest)
@@ -75,9 +78,10 @@ public abstract class Piece
 
 	/**
 	 * Permet de vérifier si un pièce vas être sur le chemin de notre pièce.
-	 * @param lstPiece, liste de tout les pièce contenue sur le plateau.
-	 * @param ligDest, ligne sur la quelle on veut déplacer la pièce.
-	 * @param colDest, colonne sur la quelle on veut déplacer la pièce.
+	 * @param lstPieceBlanc : liste des Pieces blanches sur le plateau.
+	 * @param lstPieceNoir  : liste des Pieces noir     sur le plateau.
+	 * @param ligDest       : ligne   sur la quelle on veut déplacer la pièce.
+	 * @param colDest       : colonne sur la quelle on veut déplacer la pièce.
 	 * @return si une pièce est sur le chemin la méthode retourne vrai sinon elle retourne faux
 	 */
 	public boolean autresPieces(List<Piece> lstPieceBlanc, List<Piece> lstPieceNoir, int ligDest, int colDest)

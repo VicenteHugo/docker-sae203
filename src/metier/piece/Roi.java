@@ -4,8 +4,9 @@ public class Roi extends Piece
 {
 	/**
 	 * Constructeur du FoRoiu
-	 * @param lig ligne   du Roi.
-	 * @param col colonne du Roi.
+	 * @param lig  : ligne   du Roi.
+	 * @param col  : colonne du Roi.
+	 * @param coul : couleur de la piece.
 	 */
 	public Roi(int lig, int col, int coul)
 	{
@@ -38,5 +39,9 @@ public class Roi extends Piece
 		         this.getLig() + 1 == ligDest && this.getCol() + 1 == colDest ));
 	}
 
+	/**
+	 * Permet de connaître le symbole de la pièce.
+	 * @return le charactère symbolisant la pièce.
+	 */
 	public char getSymbole(){return 'K';}
 }
