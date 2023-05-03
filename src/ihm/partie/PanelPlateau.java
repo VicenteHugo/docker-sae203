@@ -17,9 +17,13 @@ public class PanelPlateau extends JPanel
 	
 	private int cote;
 
+	private int decalage;
+
 	public PanelPlateau(Controleur ctrl)
 	{
 		this.ctrl = ctrl;
+
+		this.decalage = 1;
 
 		this.setBackground(Color.DARK_GRAY);
 		this.setOpaque(true);
@@ -58,6 +62,11 @@ public class PanelPlateau extends JPanel
 			this.dessinerPiece(p, g);
 	}
 
+	public void changerDecalage()
+	{
+		this.decalage = this.decalage == 1 ? 0 : 1;
+	}
+
 	private void dessinerPiece(Piece p, Graphics g)
 	{
 		int lig = p.getLig();
@@ -92,7 +101,7 @@ public class PanelPlateau extends JPanel
 
 		public void mouseReleased(MouseEvent e)
 		{
-			ctrl.deplacer(this.xDep - 2, this.yDep, (int) (Math.floor(e.getX() / (cote * 1.0))) - 2, (int) (Math.floor(e.getY() / (cote * 1.0))));
+			ctrl.deplacer(this.xDep - decalage, this.yDep, (int) (Math.floor(e.getX() / (cote * 1.0))) - decalage, (int) (Math.floor(e.getY() / (cote * 1.0))));
 		}
 	}
 }

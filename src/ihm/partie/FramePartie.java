@@ -91,8 +91,9 @@ public class FramePartie extends JFrame
 		this.panelChat.updateChat(mess);
 	}
 
-	public void updateTailleChat()
+	public void updateTaille()
 	{
 		this.panelChat.updateTailleChat();
+		this.panelPlateau.changerDecalage();
 	}
 }

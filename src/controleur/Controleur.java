@@ -151,7 +151,7 @@ public class Controleur
 
 		this.ihmPartie.setLocation(0, 0);
 
-		this.ihmPartie.updateTailleChat();
+		this.ihmPartie.updateTaille();
 	}
 
 	public List<Piece> getLstPiece(int coul)
