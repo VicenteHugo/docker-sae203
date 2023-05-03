@@ -24,7 +24,7 @@ public class Client
 
 	public boolean mouvementValide(Piece p)
 	{
-		return this.nbDeplacement % 2 == this.clientToServer.getNumJoueur() && p.getCoul() == this.nbDeplacement % 2 ;
+		return this.nbDeplacement % 2 == this.clientToServer.getNumJoueur() && p.getCoul() == this.nbDeplacement % 2;
 	}
 
 	public void setNbDeplacement(int nbDeplacement)

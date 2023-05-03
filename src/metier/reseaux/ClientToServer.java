@@ -91,6 +91,8 @@ public class ClientToServer extends Thread
 		catch (Exception e){e.printStackTrace();}
 	}
 
+
+
 	public void sendMovement(int ligDep, int colDep, int ligDest, int colDest, int coulPiece)
 	{
 		try
