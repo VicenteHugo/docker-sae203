@@ -88,20 +88,24 @@ public class Metier
 	{
 		this.client.setNbDeplacement(nbDeplacement);
 
+		boolean mange = false;
+
 		if(!maj)
 			return;
 
 		Piece pManger = this.getPiece(ligDest, colDest);
 		if(pManger != null)
-			this.manger(pManger);
+		{
+			mange = this.manger(pManger);
+		}
 			
 	
 	
 		Piece p = this.getPiece(ligDep, colDep);
 		if(p == null)
 			return;
-
-		p.deplacer(ligDest, colDest);
+			
+		p.deplacer(ligDest, colDest, mange);
 	}
 
 
@@ -118,14 +122,14 @@ public class Metier
 
 
 		Piece pManger = this.getPiece(ligDest, colDest);
-		if(pManger != null && p.getCoul() != pManger.getCoul() && p.deplacer(ligDest, colDest))
+		if(pManger != null && p.getCoul() != pManger.getCoul() && p.deplacer(ligDest, colDest, false))
 		{
-			this.manger(pManger);
-			this.client.sendMovement(ligDep, colDep, ligDest, colDest, p.getCoul());
+			if(this.manger(pManger))
+				this.client.sendMovement(ligDep, colDep, ligDest, colDest, p.getCoul());
 			return;
 		}
 		
-		if(pManger == null && p.deplacer(ligDest, colDest))
+		if(pManger == null && p.deplacer(ligDest, colDest, false))
 		{
 			this.client.sendMovement(ligDep, colDep, ligDest, colDest, p.getCoul());
 			return;
@@ -147,12 +151,12 @@ public class Metier
 		return null;
 	}
 
-	public void manger(Piece p)
+	public boolean manger(Piece p)
 	{
 		if(p.getCoul() == Piece.BLANC)
-			lstPieceBlanche.remove(p);
+			return lstPieceBlanche.remove(p);
 		else
-			lstPieceNoir.remove(p);
+			return lstPieceNoir.remove(p);
 	}
 
 

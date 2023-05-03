@@ -37,13 +37,21 @@ public abstract class Piece
 	{
 		this(p.lig, p.col, p.coul);
 	}
+
 	/**
 	 * Méthode pour déplacer une piece
 	 * @param ligDest ligne   de destination.
 	 * @param colDest colonne de destination.
 	 */
-	public boolean deplacer(int ligDest, int colDest)
+	public boolean deplacer(int ligDest, int colDest, boolean force)
 	{
+		if(force)
+		{
+			this.lig = ligDest ;
+			this.col = colDest ;
+			return true;
+		}
+
 		if(ligDest > 7 || ligDest < 0 || colDest > 7 || colDest < 0)
 		{
 			return false;
