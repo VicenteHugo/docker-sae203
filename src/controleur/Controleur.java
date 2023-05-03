@@ -150,6 +150,8 @@ public class Controleur
 			this.ihmPartie.setSize(Controleur.DIM_SCREEN);
 
 		this.ihmPartie.setLocation(0, 0);
+
+		this.ihmPartie.updateTailleChat();
 	}
 
 	public List<Piece> getLstPiece(int coul)

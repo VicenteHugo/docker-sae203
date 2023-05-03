@@ -90,4 +90,9 @@ public class FramePartie extends JFrame
 	{
 		this.panelChat.updateChat(mess);
 	}
+
+	public void updateTailleChat()
+	{
+		this.panelChat.updateTailleChat();
+	}
 }

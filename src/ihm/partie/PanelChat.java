@@ -38,7 +38,7 @@ public class PanelChat extends JPanel implements ActionListener, KeyListener
 		this.panelChat   = new JPanel();
 		this.panelChaton = new JPanel();
 
-		this.messageEnvoi = new JTextField(16);
+		this.messageEnvoi = new JTextField((int)(this.mere.getSize().getWidth()/10 - 9)/6 - 5);
 		this.envoie       = new JButton("Envoyer");
 
 		this.chat = new JTextArea();
@@ -91,5 +91,11 @@ public class PanelChat extends JPanel implements ActionListener, KeyListener
 	public void updateChat(String mess)
 	{
 		this.chat.append(mess);
+	}
+
+	public void updateTailleChat()
+	{
+		this.messageEnvoi.setColumns((int)(this.mere.getSize().getWidth()/10 - 9)/6 - 5);
+		this.chat.setColumns((int)(this.mere.getSize().getWidth()/10)/6 - 1);
 	}
 }
