@@ -29,6 +29,10 @@ public class Metier
 	private List<Piece> lstPieceBlanche;
 	private List<Piece> lstPieceNoir   ;
 
+	/**
+	 * 
+	 * @param ctrl
+	 */
 	public Metier(Controleur ctrl)
 	{
 		this.ctrl = ctrl;
@@ -38,15 +42,25 @@ public class Metier
 		Piece.setMetier(this);
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getJoueur() {return this.joueur;}
 
+	/**
+	 * 
+	 * @param pseudo
+	 */
 	public void setJoueur(String pseudo)
 	{
 		if(this.joueur == null)
 			this.joueur = pseudo;
 	}
 
-
+	/**
+	 * 
+	 */
 	private static List<Piece> generePiece(int coul)
 	{
 		List<Piece> lst = new ArrayList<Piece>();
@@ -79,11 +93,25 @@ public class Metier
 		return lst;
 	}
 
+	/**
+	 * 
+	 * @param coul
+	 * @return
+	 */
 	public List<Piece> getLstPiece(int coul)
 	{
 		return coul == Piece.BLANC ? this.lstPieceBlanche : this.lstPieceNoir;
 	}
 
+	/**
+	 * 
+	 * @param ligDep
+	 * @param colDep
+	 * @param ligDest
+	 * @param colDest
+	 * @param maj
+	 * @param nbDeplacement
+	 */
 	public void majPiece(int ligDep, int colDep, int ligDest, int colDest, boolean maj, int nbDeplacement)
 	{
 		this.client.setNbDeplacement(nbDeplacement);
@@ -104,7 +132,13 @@ public class Metier
 		p.deplacer(ligDest, colDest);
 	}
 
-
+	/**
+	 * 
+	 * @param ligDep
+	 * @param colDep
+	 * @param ligDest
+	 * @param colDest
+	 */
 	public void deplacer(int ligDep, int colDep, int ligDest, int colDest)
 	{
 		Piece p = this.getPiece(ligDep, colDep);
@@ -134,6 +168,12 @@ public class Metier
 		return;
 	}
 
+	/**
+	 * 
+	 * @param lig
+	 * @param col
+	 * @return
+	 */
 	public Piece getPiece(int lig, int col)
 	{
 		for (Piece piece : lstPieceBlanche)
@@ -147,6 +187,10 @@ public class Metier
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param p
+	 */
 	public void manger(Piece p)
 	{
 		if(p.getCoul() == Piece.BLANC)
@@ -157,23 +201,39 @@ public class Metier
 
 
 	/*RESEAUX */
+	/**
+	 * 
+	 */
 	public void creerServer()
 	{
 		this.server = new Server(this.ctrl);
 		this.server.start();
 	}
 
+	/**
+	 * 
+	 * @param ip
+	 * @param username
+	 * @return
+	 */
 	public boolean rejoindreServer(String ip, String username)
 	{
 		this.client = new Client(this.ctrl);
 		return this.client.connect(ip, 6666, username);
 	}
 
+	/**
+	 * 
+	 */
 	public void fermer()
 	{
 		this.client.disconnect();
 	}
 
+	/**
+	 * 
+	 * @param mess
+	 */
 	public void envoieMessage(String mess)
 	{
 		this.client.sendMessage(mess);

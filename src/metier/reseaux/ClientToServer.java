@@ -20,13 +20,23 @@ public class ClientToServer extends Thread
 	private int                numJoueur;
 	
 
-
+	/**
+	 * 
+	 * @param ctrl   : 
+	 * @param client : 
+	 */
 	public ClientToServer(Controleur ctrl, Client client)
 	{
 		this.ctrl      = ctrl;
 		this.client    = client;
 	}
 
+	/**
+	 * 
+	 * @param ip   : 
+	 * @param port : 
+	 * @return
+	 */
 	public boolean connect(String ip, int port)
 	{
 		try
@@ -48,7 +58,10 @@ public class ClientToServer extends Thread
 
 		return true;
 	}
-
+	
+	/**
+	 * 
+	 */
 	public void disconnect()
 	{
 		try 
@@ -59,6 +72,9 @@ public class ClientToServer extends Thread
 		} catch (Exception e) {}
 	}
 
+	/**
+	 * 
+	 */
 	public void majNbDeplacement()
 	{
 		try 
@@ -69,6 +85,9 @@ public class ClientToServer extends Thread
 		} catch (Exception e) {}
 	}
 
+	/**
+	 * 
+	 */
 	public void sendMaj()
 	{
 		try 
@@ -79,6 +98,10 @@ public class ClientToServer extends Thread
 		} catch (Exception e) {e.printStackTrace();}
 	}
 
+	/**
+	 * 
+	 * @param username : 
+	 */
 	public void sendUsername(String username)
 	{
 		try
@@ -91,6 +114,14 @@ public class ClientToServer extends Thread
 		catch (Exception e){e.printStackTrace();}
 	}
 
+	/**
+	 * 
+	 * @param ligDep    : 
+	 * @param colDep    : 
+	 * @param ligDest   : 
+	 * @param colDest   : 
+	 * @param coulPiece : 
+	 */
 	public void sendMovement(int ligDep, int colDep, int ligDest, int colDest, int coulPiece)
 	{
 		try
@@ -103,6 +134,9 @@ public class ClientToServer extends Thread
 		catch (Exception e){e.printStackTrace();}
 	}
 
+	/**
+	 * 
+	 */
 	public void setNumJoueur()
 	{
 		try 
@@ -113,16 +147,30 @@ public class ClientToServer extends Thread
 		} catch (Exception e) {}
 	}
 
+	/**
+	 * 
+	 * @param nbDeplacement : 
+	 */
 	public void setNbDeplacement(int nbDeplacement)
 	{
 		this.client.setNbDeplacement(nbDeplacement);
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getNumJoueur() {return this.numJoueur;}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean estJoueur(){return this.numJoueur == 0 || this.numJoueur == 1;}
 
-
+	/**
+	 * 
+	 */
 	@Override
 	public void run()
 	{
@@ -185,6 +233,10 @@ public class ClientToServer extends Thread
 		}
 	}
 
+	/**
+	 * 
+	 * @param mess : 
+	 */
 	public void sendMessage(String mess)
 	{
 		try

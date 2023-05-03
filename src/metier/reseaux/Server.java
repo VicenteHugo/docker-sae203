@@ -22,7 +22,10 @@ public class Server extends Thread
 	private String               pseudoNoir;
 
 
-
+	/**
+	 * 
+	 * @param ctrl
+	 */
 	public Server(Controleur ctrl)
 	{
 		this.ctrl = ctrl;
@@ -36,15 +39,29 @@ public class Server extends Thread
 		catch (Exception e){e.printStackTrace();}
 	}
 
+	/**
+	 * 
+	 */
 	public void disconnect()
 	{
 		this.lstServerToClient.get(0).disconnect();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getNbDeplacement(){return this.nbDeplacement;}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getNbJoueur(){return this.lstServerToClient.size();}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void run()
 	{
@@ -61,6 +78,14 @@ public class Server extends Thread
 		}
 	}
 
+	/**
+	 * 
+	 * @param ligDep
+	 * @param colDep
+	 * @param ligDest
+	 * @param colDest
+	 * @param coulPiece
+	 */
 	public void broadcastMovement(int ligDep, int colDep, int ligDest, int colDest, int coulPiece)
 	{
 		this.nbDeplacement++;
@@ -68,14 +93,25 @@ public class Server extends Thread
 			serverToClient.sendMovement(ligDep, colDep, ligDest, colDest, coulPiece, this.nbDeplacement);
 	}
 
+	/**
+	 * 
+	 */
 	public void maj()
 	{
 		for (ServerToClient serverToClient : lstServerToClient)
 			serverToClient.maj(this.pseudoBlanc, this.pseudoNoir);
 	} 
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Controleur getCtrl(){return this.ctrl;}
 
+	/**
+	 * 
+	 * @param username
+	 */
 	public void setJoueur(String username) 
 	{
 		if(this.pseudoBlanc == null)
@@ -84,6 +120,10 @@ public class Server extends Thread
 			this.pseudoNoir = username;
 	}
 
+	/**
+	 * 
+	 * @param mess
+	 */
 	public void broadcastMessage(String mess)
 	{
 		for (ServerToClient serverToClient : lstServerToClient)

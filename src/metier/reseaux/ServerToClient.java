@@ -11,6 +11,11 @@ public class ServerToClient extends Thread
 	private ObjectOutputStream oos;
 	private boolean            running;
 
+	/**
+	 * 
+	 * @param server
+	 * @param socket
+	 */
 	public ServerToClient(Server server, Socket socket)
 	{
 		this.server = server;
@@ -23,6 +28,9 @@ public class ServerToClient extends Thread
 		} catch (Exception e) {e.printStackTrace();}
 	}
 
+	/**
+	 * 
+	 */
 	public void disconnect()
 	{
 		try 
@@ -33,8 +41,16 @@ public class ServerToClient extends Thread
 		} catch (Exception e) {}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Server getServer() {return this.server;}
 	
+	/**
+	 * 
+	 * @param numJoueur
+	 */
 	public void setNumJoueur(int numJoueur)
 	{
 		try
@@ -47,7 +63,15 @@ public class ServerToClient extends Thread
 		catch(Exception e){}
 	}
 
-
+	/**
+	 * 
+	 * @param ligDep
+	 * @param colDep
+	 * @param ligDest
+	 * @param colDest
+	 * @param coulPiece
+	 * @param nbDeplacement
+	 */
 	public void sendMovement(int ligDep, int colDep, int ligDest, int colDest, int coulPiece, int nbDeplacement)
 	{
 		try
@@ -59,6 +83,10 @@ public class ServerToClient extends Thread
 		}catch(Exception e){e.printStackTrace();}
 	}
 
+	/**
+	 * 
+	 * @param nbDeplacement
+	 */
 	public void setNbDeplacement(int nbDeplacement)
 	{
 		try
@@ -71,6 +99,11 @@ public class ServerToClient extends Thread
 		catch(Exception e){}
 	}
 
+	/**
+	 * 
+	 * @param pseudo1
+	 * @param pseudo2
+	 */
 	public void maj(String pseudo1, String pseudo2)
 	{
 		try 
@@ -83,6 +116,10 @@ public class ServerToClient extends Thread
 		} catch (Exception e) {e.printStackTrace();}
 	}
 
+	/**
+	 * 
+	 * @param mess
+	 */
 	public void sendMessage(String mess)
 	{
 		try
@@ -95,6 +132,9 @@ public class ServerToClient extends Thread
 		catch (Exception e){e.printStackTrace();}
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void run()
 	{
