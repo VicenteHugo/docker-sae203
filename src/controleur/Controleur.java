@@ -113,8 +113,13 @@ public class Controleur
 		return true;
 	}
 
+	/*-----------*/
+	/*   FRAME   */
+	/*-----------*/
 
-	/*FRAME */
+	/**
+	 * Méthode pour finir la connexion
+	 */
 	public void terminer()
 	{
 		JOptionPane.showMessageDialog(null, "Connexion perdue");
@@ -122,23 +127,41 @@ public class Controleur
 		System.exit(0);
 	}
 
+	/**
+	 * Méthode pour fermer la Frame
+	 */
 	public void fermer()
 	{
 		this.metier.fermer();
 	}
 
+	/**
+	 * Méthode pour mettre à jour les pseudo des joueurs
+	 * @param pseudo1 : Pseudo joueur 1
+	 * @param pseudo2 : Pseudo joueur 1
+	 */
 	public void maj(String pseudo1, String pseudo2)
 	{
 		this.ihmPartie.setPseudo(pseudo1, pseudo2);
 	}
 
+	/**
+	 * Méthode pour obtenir la Frame de la partie
+	 * @return : FramePartie
+	 */
 	public FramePartie getFramePartie(){return this.ihmPartie;}
 	
+	/**
+	 * Méthode pour réduire l'application en bas de l'écran
+	 */
 	public void reduire()
 	{
 		
 	}
 
+	/**
+	 * Méthode pour modifier la taille de la Frame
+	 */
 	public void resize()
 	{
 		if(this.ihmPartie == null)
@@ -154,11 +177,21 @@ public class Controleur
 		this.ihmPartie.updateTaille();
 	}
 
+	/**
+	 * Méthode pour obtenir la liste des pieces d'une couleur
+	 * @return : la liste des pieces
+	 */
 	public List<Piece> getLstPiece(int coul)
 	{
 		return this.metier.getLstPiece(coul);
 	}
 
+	/**
+	 * Méthode pour obtenir le chemin vers l'image correspondant au Symbole et à la Couleur de la piece
+	 * @param symb : Symbole de la piece
+	 * @param coul : Couleur de la piece
+	 * @return : chemin absolu
+	 */
 	public String getPath(char symb, int coul)
 	{
 		String sRet = "./donnees/images/";
@@ -181,20 +214,33 @@ public class Controleur
 		return sRet + ".png";
 	}
 
+	/**
+	 * Méthode pour notre pseudo de joueur
+	 * @return : notre pseudo
+	 */
 	public String getPseudo(){return this.metier.getJoueur();}
 
-	public static void main(String[] args) 
-	{
-		new Controleur();
-	}
-
+	/**
+	 * Méthode pour envoyer un message 
+	 * @param mess : message à envoyer
+	 */
 	public void envoieMessage(String mess)
 	{
 		this.metier.envoieMessage(mess);
 	}
 
+	/**
+	 * Méthode pour actualiser le chat
+	 */
 	public void updateChat(String mess)
 	{
 		this.ihmPartie.updateChat(mess);
+	}
+
+	/*----------------------------------------------------------------------------------------------------------------*/
+
+	public static void main(String[] args) 
+	{
+		new Controleur();
 	}
 }
