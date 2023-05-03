@@ -24,18 +24,12 @@ public class Client
 
 	public boolean mouvementValide(Piece p)
 	{
-		System.out.println(this.nbDeplacement + "   " + this.clientToServer.getNumJoueur());
-		System.out.println(this.nbDeplacement + "   " + p.getCoul());
-		System.out.println();
-
 		return this.nbDeplacement % 2 == this.clientToServer.getNumJoueur() && p.getCoul() == this.nbDeplacement % 2 ;
 	}
 
 	public void setNbDeplacement(int nbDeplacement)
 	{
 		this.nbDeplacement = nbDeplacement;
-
-		System.out.println(this.nbDeplacement);
 	}
 
 	public void disconnect()

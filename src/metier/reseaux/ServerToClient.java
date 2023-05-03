@@ -50,7 +50,6 @@ public class ServerToClient extends Thread
 
 	public void sendMovement(int ligDep, int colDep, int ligDest, int colDest, int coulPiece, int nbDeplacement)
 	{
-		System.out.println(nbDeplacement);
 		try
 		{
 			oos.reset();
