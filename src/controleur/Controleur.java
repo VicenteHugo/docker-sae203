@@ -185,4 +185,14 @@ public class Controleur
 	{
 		new Controleur();
 	}
+
+	public void envoieMessage(String mess)
+	{
+		this.metier.envoieMessage(mess);
+	}
+
+	public void updateChat(String mess)
+	{
+		this.ihmPartie.updateChat(mess);
+	}
 }

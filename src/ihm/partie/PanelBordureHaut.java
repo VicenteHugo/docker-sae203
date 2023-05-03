@@ -58,8 +58,8 @@ public class PanelBordureHaut extends JPanel
 		
 		//Activation
 		btnReduire.addActionListener((e) -> ctrl.reduire());
-		btnResize .addActionListener((e) -> ctrl.resize());
-		btnFermer.addActionListener((e)  -> ctrl.fermer());
+		btnResize .addActionListener((e) -> ctrl.resize() );
+		btnFermer .addActionListener((e) -> ctrl.fermer() );
 
 		GereBordure gb = new GereBordure();
 		this.addMouseMotionListener(gb);

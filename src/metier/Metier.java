@@ -173,4 +173,9 @@ public class Metier
 	{
 		this.client.disconnect();
 	}
+
+	public void envoieMessage(String mess)
+	{
+		this.client.sendMessage(mess);
+	}
 }

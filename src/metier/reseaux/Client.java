@@ -50,4 +50,9 @@ public class Client
 
 		return success;
 	}
+
+	public void sendMessage(String mess)
+	{
+		this.clientToServer.sendMessage(mess);
+	}
 }

@@ -120,7 +120,8 @@ public class ClientToServer extends Thread
 
 	public int getNumJoueur() {return this.numJoueur;}
 
-	public boolean estJoueur(){return this.numJoueur == 0 || this.numJoueur == 1;}
+	public boolean estJoueur(){return this.numJoueur == 0 && this.numJoueur == 1;}
+
 
 	@Override
 	public void run()
@@ -166,6 +167,13 @@ public class ClientToServer extends Thread
 					this.ctrl.majPiece(ligDep, colDep, ligDest, colDest, ! (this.numJoueur == coulPiece) , nbDeplacement);
 				}
 
+				if(this.estJoueur() && command.equals("newMessage"))
+				{
+					String message = (String)ois.readObject();
+
+					this.ctrl.updateChat(message);
+				}
+
 				if(command.equals("setNumJoueur"))
 					this.numJoueur = (int) ois.readObject();
 					
@@ -175,5 +183,17 @@ public class ClientToServer extends Thread
 			}
 			catch (Exception e){e.printStackTrace();this.ctrl.terminer();}
 		}
+	}
+
+	public void sendMessage(String mess)
+	{
+		try
+		{
+			oos.reset();
+			oos.writeObject("newMessage");
+			oos.writeObject(mess);
+			oos.flush();
+		}
+		catch (Exception e){e.printStackTrace();}
 	}
 }

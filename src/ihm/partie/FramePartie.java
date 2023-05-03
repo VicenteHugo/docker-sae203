@@ -58,7 +58,7 @@ public class FramePartie extends JFrame
 		this.panelJoueurNoir  = new PanelJoueur     (Color.BLACK, j2, this);
 		this.panelInformation = new PanelInformation();
 
-		this.panelChat        = new PanelChat(ctrl);
+		this.panelChat        = new PanelChat(ctrl, this);
 
 		//Positionnement
 		panelJeu.add(this.panelPlateau    , BorderLayout.CENTER);
@@ -85,4 +85,9 @@ public class FramePartie extends JFrame
 	}
 
 	public int getWidhtPanelJoueur(){return this.panelJoueurNoir.getWidth();}
+
+	public void updateChat(String mess)
+	{
+		this.panelChat.updateChat(mess);
+	}
 }
