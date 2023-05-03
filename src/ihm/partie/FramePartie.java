@@ -20,7 +20,12 @@ public class FramePartie extends JFrame
 
 	private PanelChat        panelChat;
 
-
+	/**
+	 * Constructeur de FramePartie
+	 * @param ctrl : Controleur de l'IHM
+	 * @param j1   : pseudo du joueur 1
+	 * @param j2   : pseudo du joueur 2
+	 */
 	public FramePartie(Controleur ctrl, String j1, String j2)
 	{
 	
@@ -73,24 +78,41 @@ public class FramePartie extends JFrame
 		this.setVisible(true);
 	}	
 
+	/**
+	 * Méthode pour changer le titre de la Frame
+	 */
 	public void setTitle(String title)
 	{
 		this.panelBordure.setTitle(title);
 	}
 
+	/**
+	 * Méthode pour changer le pseudo des joueurs
+	 */
 	public void setPseudo(String pseudo1, String pseudo2)
 	{
 		this.panelJoueurBlanc.setPseudo(pseudo1);
 		this.panelJoueurNoir .setPseudo(pseudo2);
 	}
 
+	/**
+	 * Méthode pour obtenir la largeur du PanelJoueur
+	 * @return : largeur du PanelJoueur
+	 */
 	public int getWidhtPanelJoueur(){return this.panelJoueurNoir.getWidth();}
 
+	/**
+	 * Méthode pour actualiser le chat
+	 * @param mess : message ajouter au chat
+	 */
 	public void updateChat(String mess)
 	{
 		this.panelChat.updateChat(mess);
 	}
 
+	/**
+	 * Méthode pour mettre à jour la taille des Panel qui compose la frame
+	 */
 	public void updateTaille()
 	{
 		this.panelChat.updateTailleChat();

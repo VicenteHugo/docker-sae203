@@ -19,6 +19,12 @@ public class PanelBordureHaut extends JPanel
 	private JLabel      title;
 	private FramePartie frame;
 
+	/**
+	 * Constructeur du PanelBordurehaut
+	 * @param lt    : BorderLayout du Panel
+	 * @param ctrl  : Controleur de l'IHM
+	 * @param frame : Frame sur laquelle est le Panel
+	 */
 	public PanelBordureHaut(BorderLayout lt, Controleur ctrl, FramePartie frame)
 	{
 		super(lt);
@@ -65,6 +71,10 @@ public class PanelBordureHaut extends JPanel
 		this.addMouseMotionListener(gb);
 	}
 
+	/**
+	 * Méthode pour modifier le titre du Panel
+	 * @param title : nouveau titre
+	 */
 	public void setTitle(String title)
 	{
 		if(title == null)
@@ -76,17 +86,26 @@ public class PanelBordureHaut extends JPanel
 		this.title.setText(title);
 	}
 
+	/**
+	 * Class pour gerer la bordure des Boutons
+	 */
 	private class GereBordure extends MouseAdapter
 	{
 		private int xDep;
 		private int yDep;
 
+		/**
+		 * Méthode pour detecter quand la sourie est bouger
+		 */
 		public void mouseMoved(MouseEvent e)
 		{
 			this.xDep = e.getX();
 			this.yDep = e.getY();
 		}
 
+		/**
+		 * Méthode pour detecter quand la sourie est bougée
+		 */
 		public void mouseDragged(MouseEvent e)
 		{
 			int x = e.getXOnScreen() - this.xDep;

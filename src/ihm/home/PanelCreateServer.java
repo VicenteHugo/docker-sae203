@@ -13,6 +13,10 @@ public class PanelCreateServer extends JPanel
 	private JTextField txtUsername;
 	private JButton    btnCreer;
 
+	/**
+	 * Constructeur de PanelCreateServer
+	 * @param ctrl : Controleur de l'IHM
+	 */
 	public PanelCreateServer(Controleur ctrl)
 	{
 		this.ctrl = ctrl;
@@ -49,6 +53,10 @@ public class PanelCreateServer extends JPanel
 		this.btnCreer.addActionListener((e) -> this.creerServer(this.txtUsername.getText()));
 	}
 
+	/**
+	 * Méthode pour creer un server
+	 * @param pseudo : pseudo du joueur créant le server
+	 */
 	public void creerServer(String pseudo)
 	{
 		this.ctrl.creerServer(pseudo);

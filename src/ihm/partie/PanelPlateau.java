@@ -19,6 +19,10 @@ public class PanelPlateau extends JPanel
 
 	private int decalage;
 
+	/**
+	 * Constructeur du PanelPlateau
+	 * @param : Controleur de l'IHM
+	 */
 	public PanelPlateau(Controleur ctrl)
 	{
 		this.ctrl = ctrl;
@@ -31,6 +35,10 @@ public class PanelPlateau extends JPanel
 		this.addMouseListener(new deplacement());
 	}	
 
+	/**
+	 * Méthode pour dessiner le plateau
+	 * @param g : Graphics pour dessiner
+	 */
 	public void dessinerPlateau(Graphics g)
 	{
 		this.cote = (this.getHeight() - 30) / 8;
@@ -62,11 +70,19 @@ public class PanelPlateau extends JPanel
 			this.dessinerPiece(p, g);
 	}
 
+	/**
+	 * Méthode pour changer le décalage
+	 */
 	public void changerDecalage()
 	{
 		this.decalage = this.decalage == 1 ? 0 : 1;
 	}
 
+	/**
+	 * Méthode pour dessiner une piece
+	 * @param p : piece à dessiner
+	 * @param g : Graphics pour dessiner
+	 */
 	private void dessinerPiece(Piece p, Graphics g)
 	{
 		int lig = p.getLig();
@@ -81,6 +97,9 @@ public class PanelPlateau extends JPanel
 		g.drawImage(new ImageIcon(this.ctrl.getPath(p.getSymbole(), p.getCoul())).getImage(), x, y, cote, cote, null);
 	}
 
+	/**
+	 * Méthode pour peindre
+	 */
 	@Override
 	public void paint(Graphics g) 
 	{
@@ -88,17 +107,26 @@ public class PanelPlateau extends JPanel
 		this.dessinerPlateau(g);
 	}
 
+	/**
+	 * Class pour le deplacement de la sourie
+	 */
 	private class deplacement extends MouseAdapter
 	{
 		private int xDep;
 		private int yDep;
 
+		/**
+		 * Méthode pour detecter quand la sourie est pressée
+		 */
 		public void mousePressed(MouseEvent e)
 		{
 			this.xDep = (int) (Math.floor(e.getX() / (cote * 1.0)));
 			this.yDep = (int) (Math.floor(e.getY() / (cote * 1.0)));
 		}
 
+		/**
+		 * Méthode pour detecter quand la sourie est relachée
+		 */
 		public void mouseReleased(MouseEvent e)
 		{
 			ctrl.deplacer(this.xDep - decalage, this.yDep, (int) (Math.floor(e.getX() / (cote * 1.0))) - decalage, (int) (Math.floor(e.getY() / (cote * 1.0))));

@@ -9,7 +9,10 @@ import controleur.Controleur;
 public class FrameHome extends JFrame 
 {
 	
-
+	/**
+	 * Constructeur de FrameHome
+	 * @param ctrl : Controleur de l'IHM
+	 */
 	public FrameHome(Controleur ctrl)
 	{
 		this.setTitle("Chess : Home");

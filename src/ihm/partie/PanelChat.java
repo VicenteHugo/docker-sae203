@@ -30,6 +30,11 @@ public class PanelChat extends JPanel implements ActionListener, KeyListener
 
 	JTextArea  chat;
 
+	/**
+	 * Constructeur de PanelChat
+	 * @param ctrl : Controleur de l'IHM
+	 * @param mere : Frame sur laquelle est le Panel
+	 */
 	public PanelChat(Controleur ctrl, JFrame mere)
 	{
 		this.ctrl = ctrl;
@@ -67,6 +72,9 @@ public class PanelChat extends JPanel implements ActionListener, KeyListener
 		this.messageEnvoi.addKeyListener(this);
 	}
 
+	/**
+	 * Méthode pour detecter qu'une action est réalisée sur un objet
+	 */
 	public void actionPerformed(ActionEvent e)
 	{
 		if(!messageEnvoi.getText().equals(""))
@@ -76,6 +84,9 @@ public class PanelChat extends JPanel implements ActionListener, KeyListener
 		}
 	}
 
+	/**
+	 * Méthode pour detecter qu'une touche est pressée
+	 */
 	public void keyPressed(KeyEvent e)
 	{
 		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Enter"))
@@ -85,14 +96,28 @@ public class PanelChat extends JPanel implements ActionListener, KeyListener
 		}
 	}
 
+	/**
+	 * Méthode pour detecter qu'une touche est utilisée
+	 */
 	public void keyTyped   (KeyEvent e) {}
+
+	/**
+	 * Méthode pour detecter qu'une touche est relachée
+	 */
 	public void keyReleased(KeyEvent e) {}
 
+	/**
+	 * Méthode pour mettre a jour le chat
+	 * @param mess : message à ajouter au chat
+	 */
 	public void updateChat(String mess)
 	{
 		this.chat.append(mess);
 	}
 
+	/**
+	 * Méthode pour mettre à jour la taille du chat
+	 */
 	public void updateTailleChat()
 	{
 		this.messageEnvoi.setColumns((int)(this.mere.getSize().getWidth()/10 - 9)/6 - 5);

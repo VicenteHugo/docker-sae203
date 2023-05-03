@@ -19,6 +19,12 @@ public class PanelJoueur extends JPanel
 	private JPanel      panelPiece;
 	private int         indice;
 
+	/**
+	 * Constructeur du PanelJoueur
+	 * @param coul   : Couleur des pieces du joueur
+	 * @param pseudo : pseudo du joueur
+	 * @param frame  : Frame sur laquelle est le Panel
+	 */
 	public PanelJoueur(Color coul, String pseudo, FramePartie frame)
 	{
 		this.indice = 0;
@@ -49,12 +55,20 @@ public class PanelJoueur extends JPanel
 		this.add(this.pseudo, BorderLayout.NORTH);
 	}
 	
-	
+	/**
+	 * Méthode pour ajouter une image de piece
+	 * @param coul : couleur de la piece
+	 * @param img  : image de la piece
+	 */
 	public void ajouterImage(int coul, ImageIcon img)
 	{
 		this.panelPiece.add(new JLabel(img), indice++);
 	}
 
+	/**
+	 * Méthode pour mettre à jour le pseudo du joueur
+	 * @param pseudo : nouveau pseudo du joueur
+	 */
 	public void setPseudo(String pseudo)
 	{
 		this.pseudo.setText(pseudo);

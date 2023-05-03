@@ -10,6 +10,9 @@ public class PanelInformation extends JPanel
 {
 	private JLabel     temps;
 
+	/**
+	 * Constructeur du PanelInformation
+	 */
 	public PanelInformation()
 	{
 		this.setBackground(Color.DARK_GRAY);

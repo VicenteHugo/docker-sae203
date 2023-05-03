@@ -14,6 +14,10 @@ public class PanelJoinServer extends JPanel
 	private JTextField txtUsername;
 	private JButton    btnRejoindre;
 
+	/**
+	 * Constructeur du PanelJoinServer
+	 * @param ctrl : Controleur de l'IHM
+	 */
 	public PanelJoinServer(Controleur ctrl)
 	{
 		this.ctrl = ctrl;
@@ -62,6 +66,11 @@ public class PanelJoinServer extends JPanel
 		this.btnRejoindre.addActionListener((e) -> this.rejoindreServer(this.txtUsername.getText(), this.txtIp.getText()));
 	}
 
+	/**
+	 * Méthode pour rejoindre un server
+	 * @param pseudo : pseudo du joueur (votre pseudo)
+	 * @param ip     : adresse ip de l'hote
+	 */
 	public void rejoindreServer(String pseudo, String ip)
 	{
 		this.ctrl.rejoindreServer(pseudo, ip);
