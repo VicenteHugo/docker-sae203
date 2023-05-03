@@ -39,5 +39,6 @@ public class Fou extends Piece
 	 * Permet de connaître le symbole de la pièce.
 	 * @return le charactère symbolisant la pièce.
 	 */
+	@Override
 	public char getSymbole(){return 'F';}
 }
