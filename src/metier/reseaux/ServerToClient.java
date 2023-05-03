@@ -83,6 +83,17 @@ public class ServerToClient extends Thread
 		} catch (Exception e) {e.printStackTrace();}
 	}
 
+	public void sendMessage(String mess)
+	{
+		try
+		{
+			oos.reset();
+			oos.writeObject("newMessage");
+			oos.writeObject(mess);
+			oos.flush();
+		}
+		catch (Exception e){e.printStackTrace();}
+	}
 
 	@Override
 	public void run()
@@ -134,9 +145,7 @@ public class ServerToClient extends Thread
 				}
 
 				if(command.equals("newMessage"))
-				{
 					this.server.broadcastMessage((String)ois.readObject());
-				}
 
 				if(command.equals("setNumJoueur"))
 					this.setNumJoueur(this.server.getNbJoueur() - 1);
@@ -146,17 +155,4 @@ public class ServerToClient extends Thread
 			} catch (Exception e) {}
 		}
 	}
-
-	public void sendMessage(String mess)
-	{
-		try
-		{
-			oos.reset();
-			oos.writeObject("newMessage");
-			oos.writeObject(mess);
-			oos.flush();
-		}
-		catch (Exception e){e.printStackTrace();}
-	}
-
 }
