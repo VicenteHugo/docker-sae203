@@ -20,7 +20,6 @@ public class FrameHome extends JFrame
 
 		this.setResizable(false);
 
-		this.add(new PanelCreateServer(ctrl));
 		this.add(new PanelJoinServer  (ctrl));
 	
 		this.setVisible(true);

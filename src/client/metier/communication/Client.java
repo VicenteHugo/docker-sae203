@@ -1,4 +1,4 @@
-package metier.reseaux;
+package metier.communication;
 
 import controleur.Controleur;
 import metier.piece.Piece;

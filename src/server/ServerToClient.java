@@ -1,5 +1,3 @@
-package metier.reseaux;
-
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -116,7 +114,7 @@ public class ServerToClient extends Thread
 				if(command.equals("setUsername"))
 				{
 					String username = (String)ois.readObject();
-					if(this.server.getCtrl().registerName(username))
+					if(this.server.ctrl.registerName(username))
 					{
 						oos.writeObject("usernameAccepted");
 						oos.flush();

@@ -34,26 +34,6 @@ public class Controleur
 	/*-------------*/
 
 	/**
-	 * Méthode pour creer un serveur
-	 * @param pseudo : pseudo du premier joueur
-	 */
-	public void creerServer(String pseudo)
-	{
-		if(this.registerName(pseudo))
-		{
-			this.metier .setJoueur(pseudo);
-			this.metier .creerServer();
-			this.metier .rejoindreServer("localhost", pseudo);
-			this.ihmHome.dispose();
-			this.ihmHome = null;
-
-			this.ihmPartie = new FramePartie(this, pseudo, null);
-			
-		}
-		this.ihmPartie.setTitle("Echec : " + pseudo);
-	}
-
-	/**
 	 * Méthode pour rejoindre un serveur
 	 * @param pseudo : pseudo du joueur qui rejoint
 	 * @param ip     : ip du premier joueur (donc, du serveur)

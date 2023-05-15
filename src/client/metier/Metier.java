@@ -13,15 +13,13 @@ import metier.piece.Pion;
 import metier.piece.Reine;
 import metier.piece.Roi;
 import metier.piece.Tour;
-import metier.reseaux.Client;
-import metier.reseaux.Server;
+import metier.communication.Client;
 
 
 public class Metier
 {
 	private Controleur ctrl;
 
-	private Server server;
 	private Client client;
 
 	private String joueur;
@@ -160,12 +158,6 @@ public class Metier
 	}
 
 
-	/*RESEAUX */
-	public void creerServer()
-	{
-		this.server = new Server(this.ctrl);
-		this.server.start();
-	}
 
 	public boolean rejoindreServer(String ip, String username)
 	{

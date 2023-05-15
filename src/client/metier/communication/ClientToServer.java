@@ -1,4 +1,4 @@
-package metier.reseaux;
+package metier.communication;
 
 import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;

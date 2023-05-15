@@ -1,11 +1,8 @@
-package metier.reseaux;
-
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-import controleur.Controleur;
 
 public class Server extends Thread
 {
@@ -15,13 +12,12 @@ public class Server extends Thread
 	
 	private ServerSocket         serverSocket;
 	private List<ServerToClient> lstServerToClient;
-	private Controleur           ctrl;	
 	private boolean              running;
 
 	private String               pseudoBlanc;
 	private String               pseudoNoir;
 
-
+	public Controleur ctrl;
 
 	public Server(Controleur ctrl)
 	{
@@ -73,8 +69,6 @@ public class Server extends Thread
 		for (ServerToClient serverToClient : lstServerToClient)
 			serverToClient.maj(this.pseudoBlanc, this.pseudoNoir);
 	} 
-
-	public Controleur getCtrl(){return this.ctrl;}
 
 	public void setJoueur(String username) 
 	{
