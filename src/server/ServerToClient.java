@@ -57,6 +57,17 @@ public class ServerToClient extends Thread
 		}catch(Exception e){e.printStackTrace();}
 	}
 
+	public void setPeutDeplacer()
+	{
+		try 
+		{
+			oos.reset();
+			oos.writeObject("setPeutDeplacer");
+			oos.writeObject(this.server.getNbJoueur() >= 2);
+			oos.flush();
+		} catch (Exception e) {}
+	}
+
 	public void setNbDeplacement(int nbDeplacement)
 	{
 		try
@@ -150,6 +161,10 @@ public class ServerToClient extends Thread
 
 				if(command.equals("disconnect"))
 					this.server.disconnect();
+
+				if(command.equals("getPeutDeplacer"))
+					this.setPeutDeplacer();
+
 			} catch (Exception e) {}
 		}
 	}

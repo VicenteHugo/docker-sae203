@@ -182,9 +182,22 @@ public class ClientToServer extends Thread
 
 				if(command.equals("disconnect"))
 					this.ctrl.terminer();
+
+				if(command.equals("setPeutDeplacer"))
+					this.ctrl.getMetier().setPeutJouer((boolean) (ois.readObject()));
 			}
 			catch (Exception e){e.printStackTrace();this.ctrl.terminer();}
 		}
+	}
+
+	public void getPeutDeplacer()
+	{
+		try 
+		{
+			oos.reset();
+			oos.writeObject("getPeutDeplacer");
+			oos.flush();	
+		} catch (Exception e) {}
 	}
 
 	public void sendMessage(String mess)

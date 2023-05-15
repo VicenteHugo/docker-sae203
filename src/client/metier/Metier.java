@@ -27,8 +27,11 @@ public class Metier
 	private List<Piece> lstPieceBlanche;
 	private List<Piece> lstPieceNoir   ;
 
+	public boolean peutJouer;
+
 	public Metier(Controleur ctrl)
 	{
+		this.peutJouer = false;
 		this.ctrl = ctrl;
 		this.lstPieceBlanche = Metier.generePiece(Piece.BLANC);
 		this.lstPieceNoir    = Metier.generePiece(Piece.NOIR );
@@ -106,9 +109,15 @@ public class Metier
 		p.deplacer(ligDest, colDest, mange);
 	}
 
+	public void setPeutJouer(boolean peutJouer){this.peutJouer = peutJouer;}
 
 	public void deplacer(int ligDep, int colDep, int ligDest, int colDest)
 	{
+		if(!this.peutJouer)
+		{
+			this.client.getPeutDeplacer();
+			return;
+		}	
 		Piece p = this.getPiece(ligDep, colDep);
 		
 		if(p == null)
@@ -132,7 +141,7 @@ public class Metier
 			this.client.sendMovement(ligDep, colDep, ligDest, colDest, p.getCoul());
 			return;
 		}
-
+		
 		return;
 	}
 

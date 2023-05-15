@@ -51,6 +51,12 @@ public class Client
 		return success;
 	}
 
+
+	public void getPeutDeplacer()
+	{
+		this.clientToServer.getPeutDeplacer();
+	}
+
 	public void sendMessage(String mess)
 	{
 		this.clientToServer.sendMessage(mess);

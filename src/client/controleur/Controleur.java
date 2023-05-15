@@ -114,6 +114,8 @@ public class Controleur
 
 	public FramePartie getFramePartie(){return this.ihmPartie;}
 	
+	public Metier getMetier() {return this.metier;}
+
 	public void reduire()
 	{
 		
