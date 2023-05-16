@@ -1,5 +1,6 @@
 package metier.piece;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import metier.Metier;
@@ -104,12 +105,53 @@ public abstract class Piece
 			 cptLig += ligPas, cptCol += colPas                           )
 		{
 			for (Piece p: lstPieceBlanc)
-				if(p.lig == cptLig && p.col == cptCol)
-					return true;
-			
-			for(Piece p : lstPieceNoir)
 				if (p.lig == cptLig && p.col == cptCol)
 					return true;
+			
+			for (Piece p : lstPieceNoir)
+				if (p.lig == cptLig && p.col == cptCol)
+					return true;
+
+		}
+
+		return false;
+	}
+
+	public boolean autresPieces(List<Piece> lstPieceBlanc, List<Piece> lstPieceNoir, int ligDest, int colDest, List<Piece> lstMouvementSimule)
+	{
+		int ligPas = 0;
+		int colPas = 0;
+
+		if (this.lig > ligDest) ligPas = -1;
+		if (this.lig < ligDest) ligPas =  1;
+		if (this.col > colDest) colPas = -1;
+		if (this.col < colDest) colPas =  1;
+
+
+		for (int cptLig = this.lig + ligPas, cptCol = this.col + colPas ;
+		     !(cptCol == colDest && cptLig == ligDest)                  ; 
+			 cptLig += ligPas, cptCol += colPas                           )
+		{
+			if(lstMouvementSimule.get(0).getCoul() == Piece.BLANC)
+			{
+				for (Piece p: lstMouvementSimule)
+					if (p.lig == cptLig && p.col == cptCol)
+						return true;
+			
+				for(Piece p : lstPieceNoir)
+					if (p.lig == cptLig && p.col == cptCol)
+						return true;
+			}
+			else
+			{
+				for (Piece p: lstPieceBlanc)
+					if (p.lig == cptLig && p.col == cptCol)
+						return true;
+			
+				for(Piece p : lstMouvementSimule)
+					if (p.lig == cptLig && p.col == cptCol)
+						return true;
+			}
 
 		}
 
@@ -149,9 +191,59 @@ public abstract class Piece
 	 */
 	public abstract boolean peutDeplacer(int lig, int col);
 
+	public abstract boolean simulationMouvement(int lig, int col, List<Piece> lstMouvementSimule);
+
 	/**
 	 * Permet de connaître le symbole de la pièce.
 	 * @return le charactère symbolisant la pièce.
 	 */
 	public abstract char getSymbole();
+
+	public boolean verifPasEchec(Piece pieceBouge, int ligDest, int colDest)
+	{
+		Piece monRoi = null;
+		List<Piece> lstMouvementSimule = new ArrayList<Piece>();
+
+		if(pieceBouge.getCoul() == Piece.BLANC)
+			for (Piece piece : metier.getLstPiece(Piece.BLANC))
+			{
+				if(piece != pieceBouge)
+					lstMouvementSimule.add(piece);
+
+				if(piece.getSymbole() == 'K')
+					monRoi = piece;
+			}
+		else
+			for (Piece piece : metier.getLstPiece(Piece.NOIR))
+			{
+				if(piece != pieceBouge)
+					lstMouvementSimule.add(piece);
+
+				if(piece.getSymbole() == 'K')
+						monRoi = piece;
+			}
+
+		Piece mouvementSimule = new Pion(ligDest, colDest, pieceBouge.getCoul());
+		lstMouvementSimule.add(mouvementSimule);
+
+
+		if(pieceBouge.getCoul() == Piece.BLANC)
+			for (Piece piece : metier.getLstPiece(Piece.NOIR))
+			{
+				if(piece.simulationMouvement(monRoi.getLig(), monRoi.getCol(), lstMouvementSimule) && piece.lig != mouvementSimule.lig && piece.col != mouvementSimule.col)
+				{
+					return false;
+				}
+			}
+		else
+			for (Piece piece : metier.getLstPiece(Piece.BLANC))
+			{
+				if(piece.simulationMouvement(monRoi.getLig(), monRoi.getCol(), lstMouvementSimule) && piece.lig != mouvementSimule.lig && piece.col != mouvementSimule.col)
+				{
+					return false;
+				}
+			}
+
+		return true;
+	}
 }

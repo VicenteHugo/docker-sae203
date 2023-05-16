@@ -1,5 +1,7 @@
 package metier.piece;
 
+import java.util.List;
+
 public class Cavalier extends Piece
 {
 	/**
@@ -34,8 +36,12 @@ public class Cavalier extends Piece
 		return  (this.getLig() + 2 == ligDest || this.getLig() - 2 == ligDest ) &&
                 (this.getCol() - 1 == colDest || this.getCol() + 1 == colDest ) ||	
 		        (this.getCol() + 2 == colDest || this.getCol() - 2 == colDest ) &&
-		        (this.getLig() - 1 == ligDest || this.getLig() + 1 == ligDest );
+		        (this.getLig() - 1 == ligDest || this.getLig() + 1 == ligDest )
+		        &&
+		        this.verifPasEchec(this, ligDest, colDest);
 	}
+
+	public boolean simulationMouvement(int lig, int col, List<Piece> lstMouvementSimule){return false;};
 
 	@Override
 	public char getSymbole() {return 'C';}

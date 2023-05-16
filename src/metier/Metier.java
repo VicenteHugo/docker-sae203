@@ -142,7 +142,7 @@ public class Metier
 		return;
 	}
 
-	private boolean verifEchec(Piece pieceBouge)
+	private void verifEchec(Piece pieceBouge)
 	{
 		Piece roiMechant = null;
 		
@@ -162,10 +162,7 @@ public class Metier
 		if(pieceBouge.peutDeplacer(roiMechant.getLig(), roiMechant.getCol()))
 		{
 			client.sendMessage("Le Roi " + (roiMechant.getCoul() == 1?"Noir":"Blanc") + " est en echec\n");
-			return true;
 		}
-
-		return false;
 	}
 
 	public Piece getPiece(int lig, int col)

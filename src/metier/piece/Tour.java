@@ -1,5 +1,7 @@
 package metier.piece;
 
+import java.util.List;
+
 public class Tour extends Piece
 {
 	/**
@@ -34,7 +36,16 @@ public class Tour extends Piece
 	{
 		return  (this.getLig() == ligDest && this.getCol() != colDest || this.getCol() == colDest && this.getLig() != ligDest)
 				&&
-				!this.autresPieces(Piece.metier.getLstPiece(Piece.BLANC), Piece.metier.getLstPiece(Piece.NOIR), ligDest, colDest);
+				!this.autresPieces(Piece.metier.getLstPiece(Piece.BLANC), Piece.metier.getLstPiece(Piece.NOIR), ligDest, colDest)
+		        &&
+		        this.verifPasEchec(this, ligDest, colDest);
+	}
+
+	public boolean simulationMouvement(int ligDest, int colDest, List<Piece> lstMouvementSimule) 
+	{
+		return  (this.getLig() == ligDest && this.getCol() != colDest || this.getCol() == colDest && this.getLig() != ligDest)
+				&&
+				!this.autresPieces(Piece.metier.getLstPiece(Piece.BLANC), Piece.metier.getLstPiece(Piece.NOIR), ligDest, colDest, lstMouvementSimule);
 	}
 
 	@Override

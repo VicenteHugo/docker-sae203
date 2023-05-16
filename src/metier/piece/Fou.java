@@ -1,5 +1,7 @@
 package metier.piece;
 
+import java.util.List;
+
 public class Fou extends Piece
 {
 	/**
@@ -33,7 +35,16 @@ public class Fou extends Piece
 	{
 		return  Math.abs(this.getLig() - ligDest) == Math.abs(this.getCol() - colDest)
 		        &&
-		        !this.autresPieces(Piece.metier.getLstPiece(Piece.BLANC), Piece.metier.getLstPiece(Piece.NOIR), ligDest, colDest)     ;
+		        !this.autresPieces(Piece.metier.getLstPiece(Piece.BLANC), Piece.metier.getLstPiece(Piece.NOIR), ligDest, colDest)
+		        &&
+		        this.verifPasEchec(this, ligDest, colDest);
+	}
+
+	public boolean simulationMouvement(int ligDest, int colDest, List<Piece> lstMouvementSimule)
+	{
+		return  Math.abs(this.getLig() - ligDest) == Math.abs(this.getCol() - colDest)
+		        &&
+		        !this.autresPieces(Piece.metier.getLstPiece(Piece.BLANC), Piece.metier.getLstPiece(Piece.NOIR), ligDest, colDest, lstMouvementSimule);
 	}
 
 	public char getSymbole(){return 'F';}
