@@ -132,17 +132,44 @@ public class Metier
 		if(pManger != null && p.getCoul() != pManger.getCoul() && p.deplacer(ligDest, colDest, false))
 		{
 			if(this.manger(pManger))
+			{
 				this.client.sendMovement(ligDep, colDep, ligDest, colDest, p.getCoul());
+				verifEchec(p);
+			}
 			return;
 		}
-		
+
 		if(pManger == null && p.deplacer(ligDest, colDest, false))
 		{
 			this.client.sendMovement(ligDep, colDep, ligDest, colDest, p.getCoul());
+			verifEchec(p);
 			return;
 		}
 		
 		return;
+	}
+
+	private void verifEchec(Piece pieceBouge)
+	{
+		Piece roiMechant = null;
+		
+		if(pieceBouge.getCoul() == Piece.BLANC)
+			for (Piece piece : lstPieceNoir)
+			{
+				if(piece.getSymbole() == 'K')
+					roiMechant = piece;
+			}
+		else
+			for (Piece piece : lstPieceBlanche)
+			{
+				if(piece.getSymbole() == 'K')
+						roiMechant = piece;
+			}
+
+		if(pieceBouge.peutDeplacer(roiMechant.getLig(), roiMechant.getCol()))
+		{
+			client.sendMessage("Le Roi " + (roiMechant.getCoul() == 1?"Noir":"Blanc") + " est en echec\n");
+		}
 	}
 
 	public Piece getPiece(int lig, int col)

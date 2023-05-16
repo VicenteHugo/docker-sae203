@@ -1,5 +1,7 @@
 package metier.piece;
 
+import java.util.List;
+
 public class Roi extends Piece
 {
 	/**
@@ -35,8 +37,12 @@ public class Roi extends Piece
 			    (this.getLig() - 1 == ligDest && this.getCol() - 1 == colDest ||
 		         this.getLig() - 1 == ligDest && this.getCol() + 1 == colDest ||
 		         this.getLig() + 1 == ligDest && this.getCol() - 1 == colDest ||
-		         this.getLig() + 1 == ligDest && this.getCol() + 1 == colDest ));
+		         this.getLig() + 1 == ligDest && this.getCol() + 1 == colDest ))
+				 &&
+				 this.verifPasEchec(this, ligDest, colDest);
 	}
+
+	public boolean simulationMouvement(int ligDest, int colDest, List<Piece> lstMouvementSimule){ return false; }
 
 	public char getSymbole(){return 'K';}
 }

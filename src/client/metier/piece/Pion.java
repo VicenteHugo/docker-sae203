@@ -1,5 +1,6 @@
 package metier.piece;
 
+import java.util.List;
 
 public class Pion extends Piece
 {
@@ -33,6 +34,40 @@ public class Pion extends Piece
 	 */
 	@Override
 	public boolean peutDeplacer(int ligDest, int colDest) 
+	{
+		int coul = this.getCoul() == Piece.BLANC ? Piece.NOIR : Piece.BLANC;
+
+		int pas = this.getCoul() == Piece.NOIR ? 1 : -1;
+
+		if(nbDeplacement == 0 && this.getLig() == ligDest && this.getCol() + pas * 2 == colDest && this.estConfondu(Piece.metier.getLstPiece(Piece.BLANC), ligDest, colDest) == null && this.estConfondu(Piece.metier.getLstPiece(Piece.NOIR), ligDest, colDest) == null && this.verifPasEchec(this, ligDest, colDest))
+		{
+			this.nbDeplacement++;
+			return true;
+		}	
+
+		if  (
+				this.getCol() + pas == colDest &&
+		        (
+					this.getLig() == ligDest && this.estConfondu(Piece.metier.getLstPiece(coul), ligDest, colDest) == null 
+					||
+					(
+						(this.getLig() + 1 == ligDest || this.getLig() - 1 == ligDest) 
+						&&
+						this.estConfondu(Piece.metier.getLstPiece(coul), ligDest, colDest) != null
+					)
+				)
+				&&
+				this.verifPasEchec(this, ligDest, colDest)
+			)
+		{
+			this.nbDeplacement++;
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean simulationMouvement(int ligDest, int colDest, List<Piece> lstMouvementSimule) 
 	{
 		int coul = this.getCoul() == Piece.BLANC ? Piece.NOIR : Piece.BLANC;
 
