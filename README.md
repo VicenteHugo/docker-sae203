@@ -5,8 +5,8 @@ Le projet porte sur un jeux d'echec en local avec un serveur sur Docker
 * Installation d'un service de jeux d'echec en ligne avec Docker
 * Développement d'un client et d'un serveur Java communicatifs
 	* un mode spectacteur avec nombre de place illimité
-`* Mise a jour d'une ihm pour les 2 joueur et tout les spectateur`
-`* Chat en temps réel avec tout les participent ( joueur comme spectateur)`
+	* Mise a jour d'une ihm pour les 2 joueur et tout les spectateur
+	* Chat en temps réel avec tout les participent ( joueur comme spectateur)
 
 ## Membres de l'équipe
 * A2 Vicente Hugo ([@VicenteHugo](https://github.com/VicenteHugo))
