@@ -207,7 +207,6 @@ public class Metier
 						   piece.peutDeplacer(lig + i, col - i) ||
 						   piece.peutDeplacer(lig - i, col - i))
 						{
-							System.out.println(piece.getSymbole());
 							return false;
 						}
 				}
@@ -223,8 +222,6 @@ public class Metier
 							return false;
 						}
 				}
-
-			System.err.println(i);
 		}
 
 		return true;
