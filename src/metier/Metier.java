@@ -163,8 +163,8 @@ public class Metier
 		{
 			if(etMath(pieceBouge, roiMechant))
 			{
-				client.partieFini("Le joueur " + (roiMechant.getCoul() == Piece.NOIR?"Noir":"Blanc") + " a gagner");
 				client.sendMessage("Le Roi "   + (roiMechant.getCoul() == Piece.NOIR?"Noir":"Blanc") + " est en echec et mat le joureur " + (roiMechant.getCoul() == 1?"Blanc":"Noir") + " remporte la partie");
+				client.partieFini("Le joueur " + (roiMechant.getCoul() == Piece.NOIR?"Noir":"Blanc") + " a gagner");
 			}
 			else
 				client.sendMessage("Le Roi " + (roiMechant.getCoul() == Piece.NOIR?"Noir":"Blanc") + " est en echec\n");
@@ -173,48 +173,58 @@ public class Metier
 
 	private boolean etMath(Piece pieceBouge, Piece roiMechant)
 	{
-		if(roiMechant.peutDeplacer(roiMechant.getLig() + 1, roiMechant.getCol() + 1) && estDansPlateau(roiMechant.getLig() + 1, roiMechant.getCol() + 1) ||
-		   roiMechant.peutDeplacer(roiMechant.getLig() + 1, roiMechant.getCol() - 1) && estDansPlateau(roiMechant.getLig() + 1, roiMechant.getCol() - 1) ||
-		   roiMechant.peutDeplacer(roiMechant.getLig() - 1, roiMechant.getCol() - 1) && estDansPlateau(roiMechant.getLig() - 1, roiMechant.getCol() - 1) ||
-		   roiMechant.peutDeplacer(roiMechant.getLig() - 1, roiMechant.getCol() + 1) && estDansPlateau(roiMechant.getLig() - 1, roiMechant.getCol() + 1) ||
-		   roiMechant.peutDeplacer(roiMechant.getLig() - 1, roiMechant.getCol()    ) && estDansPlateau(roiMechant.getLig() - 1, roiMechant.getCol()    ) ||
-		   roiMechant.peutDeplacer(roiMechant.getLig() + 1, roiMechant.getCol()    ) && estDansPlateau(roiMechant.getLig() + 1, roiMechant.getCol()    ) ||
-		   roiMechant.peutDeplacer(roiMechant.getLig()    , roiMechant.getCol() - 1) && estDansPlateau(roiMechant.getLig()    , roiMechant.getCol() - 1) ||
-		   roiMechant.peutDeplacer(roiMechant.getLig()    , roiMechant.getCol() + 1) && estDansPlateau(roiMechant.getLig()    , roiMechant.getCol() + 1)   )
+		//sa doit vérifier que le roi peut ce déplacer ( verifie si il ne ce met pas en echec au passage ), que le déplacement qu'il fait est dans le plateau et que le mouvement d'il peut faire ne soit pas sur un alier
+		if(roiMechant.peutDeplacer(roiMechant.getLig() + 1, roiMechant.getCol() + 1) && estDansPlateau(roiMechant.getLig() + 1, roiMechant.getCol() + 1) && roiMechant.estConfondu((roiMechant.getCoul() == Piece.NOIR?this.lstPieceNoir:this.lstPieceBlanche), roiMechant.getLig() + 1, roiMechant.getCol() + 1) == null ||
+		   roiMechant.peutDeplacer(roiMechant.getLig() + 1, roiMechant.getCol() - 1) && estDansPlateau(roiMechant.getLig() + 1, roiMechant.getCol() - 1) && roiMechant.estConfondu((roiMechant.getCoul() == Piece.NOIR?this.lstPieceNoir:this.lstPieceBlanche), roiMechant.getLig() + 1, roiMechant.getCol() - 1) == null ||
+		   roiMechant.peutDeplacer(roiMechant.getLig() - 1, roiMechant.getCol() - 1) && estDansPlateau(roiMechant.getLig() - 1, roiMechant.getCol() - 1) && roiMechant.estConfondu((roiMechant.getCoul() == Piece.NOIR?this.lstPieceNoir:this.lstPieceBlanche), roiMechant.getLig() - 1, roiMechant.getCol() - 1) == null ||
+		   roiMechant.peutDeplacer(roiMechant.getLig() - 1, roiMechant.getCol() + 1) && estDansPlateau(roiMechant.getLig() - 1, roiMechant.getCol() + 1) && roiMechant.estConfondu((roiMechant.getCoul() == Piece.NOIR?this.lstPieceNoir:this.lstPieceBlanche), roiMechant.getLig() - 1, roiMechant.getCol() + 1) == null ||
+		   roiMechant.peutDeplacer(roiMechant.getLig() - 1, roiMechant.getCol()    ) && estDansPlateau(roiMechant.getLig() - 1, roiMechant.getCol()    ) && roiMechant.estConfondu((roiMechant.getCoul() == Piece.NOIR?this.lstPieceNoir:this.lstPieceBlanche), roiMechant.getLig() - 1, roiMechant.getCol()    ) == null ||
+		   roiMechant.peutDeplacer(roiMechant.getLig() + 1, roiMechant.getCol()    ) && estDansPlateau(roiMechant.getLig() + 1, roiMechant.getCol()    ) && roiMechant.estConfondu((roiMechant.getCoul() == Piece.NOIR?this.lstPieceNoir:this.lstPieceBlanche), roiMechant.getLig() + 1, roiMechant.getCol()    ) == null ||
+		   roiMechant.peutDeplacer(roiMechant.getLig()    , roiMechant.getCol() - 1) && estDansPlateau(roiMechant.getLig()    , roiMechant.getCol() - 1) && roiMechant.estConfondu((roiMechant.getCoul() == Piece.NOIR?this.lstPieceNoir:this.lstPieceBlanche), roiMechant.getLig()    , roiMechant.getCol() - 1) == null ||
+		   roiMechant.peutDeplacer(roiMechant.getLig()    , roiMechant.getCol() + 1) && estDansPlateau(roiMechant.getLig()    , roiMechant.getCol() + 1) && roiMechant.estConfondu((roiMechant.getCoul() == Piece.NOIR?this.lstPieceNoir:this.lstPieceBlanche), roiMechant.getLig()    , roiMechant.getCol() + 1) == null   )
+		{
 			return false;
+		}
 
+		int lig     = pieceBouge.getLig();
+		int col     = pieceBouge.getCol();
+		int ligDest = roiMechant.getLig();
+		int colDest = roiMechant.getCol();
 
 		for (int i = 0;
-		             !((pieceBouge.getLig() + i) == roiMechant.getLig() && (pieceBouge.getCol() + i) == roiMechant.getCol() ||
-		               (pieceBouge.getLig() + i) == roiMechant.getLig() && (pieceBouge.getCol() - i) == roiMechant.getCol() ||
-		               (pieceBouge.getLig() - i) == roiMechant.getLig() && (pieceBouge.getCol() + i) == roiMechant.getCol() ||
-		               (pieceBouge.getLig() - i) == roiMechant.getLig() && (pieceBouge.getCol() - i) == roiMechant.getCol()   );
+		             !((lig + i) == ligDest && (col + i) == colDest ||
+		               (lig + i) == ligDest && (col - i) == colDest ||
+		               (lig - i) == ligDest && (col + i) == colDest ||
+		               (lig - i) == ligDest && (col - i) == colDest   );
 		         i++)
 		{
 			if(pieceBouge.getCoul() == Piece.BLANC)
-			for (Piece piece : lstPieceNoir)
-			{
-				if(piece.getSymbole() != 'K')
-					if(piece.peutDeplacer(pieceBouge.getLig() + i, pieceBouge.getCol() + i) ||
-					piece.peutDeplacer(pieceBouge.getLig() - i, pieceBouge.getCol() + i) ||
-					piece.peutDeplacer(pieceBouge.getLig() + i, pieceBouge.getCol() - i) ||
-					piece.peutDeplacer(pieceBouge.getLig() - i, pieceBouge.getCol() - i))
-					{
-						return false;
-					}
-			}
-		else
-			for (Piece piece : lstPieceBlanche)
-			{
-				if(piece.getSymbole() != 'K')
-					if(piece.peutDeplacer(pieceBouge.getLig() + i, pieceBouge.getCol() + i) ||
-					piece.peutDeplacer(pieceBouge.getLig() - i, pieceBouge.getCol() + i) ||
-					piece.peutDeplacer(pieceBouge.getLig() + i, pieceBouge.getCol() - i) ||
-					piece.peutDeplacer(pieceBouge.getLig() - i, pieceBouge.getCol() - i))
-					{
-						return false;
-					}
-			}
+				for (Piece piece : lstPieceNoir)
+				{
+					if(piece.getSymbole() != 'K')
+						if(piece.peutDeplacer(lig + i, col + i) ||
+						   piece.peutDeplacer(lig - i, col + i) ||
+						   piece.peutDeplacer(lig + i, col - i) ||
+						   piece.peutDeplacer(lig - i, col - i))
+						{
+							System.out.println(piece.getSymbole());
+							return false;
+						}
+				}
+			else
+				for (Piece piece : lstPieceBlanche)
+				{
+					if(piece.getSymbole() != 'K')
+						if(piece.peutDeplacer(lig + i, col + i) ||
+						   piece.peutDeplacer(lig - i, col + i) ||
+						   piece.peutDeplacer(lig + i, col - i) ||
+						   piece.peutDeplacer(lig - i, col - i))
+						{
+							return false;
+						}
+				}
+
+			System.err.println(i);
 		}
 
 		return true;

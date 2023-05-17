@@ -32,8 +32,8 @@ public class Roi extends Piece
 	 */
 	public boolean peutDeplacer(int ligDest, int colDest)
 	{
-		return ((this.getLig() == ligDest && this.getCol() == colDest - 1 || this.getCol() == colDest + 1) ||
-		        (this.getCol() == colDest && this.getLig() == ligDest - 1 || this.getLig() == ligDest + 1)  ||
+		return ((this.getLig() == ligDest && (this.getCol() == colDest - 1 || this.getCol() == colDest + 1)) ||
+		        (this.getCol() == colDest && (this.getLig() == ligDest - 1 || this.getLig() == ligDest + 1)) ||
 			    (this.getLig() - 1 == ligDest && this.getCol() - 1 == colDest ||
 		         this.getLig() - 1 == ligDest && this.getCol() + 1 == colDest ||
 		         this.getLig() + 1 == ligDest && this.getCol() - 1 == colDest ||

@@ -33,10 +33,10 @@ public class Cavalier extends Piece
 	@Override
 	public boolean peutDeplacer(int ligDest, int colDest) 
 	{
-		return  (this.getLig() + 2 == ligDest || this.getLig() - 2 == ligDest ) &&
-                (this.getCol() - 1 == colDest || this.getCol() + 1 == colDest ) ||	
+		return ((this.getLig() + 2 == ligDest || this.getLig() - 2 == ligDest ) &&
+                (this.getCol() - 1 == colDest || this.getCol() + 1 == colDest ) ||
 		        (this.getCol() + 2 == colDest || this.getCol() - 2 == colDest ) &&
-		        (this.getLig() - 1 == ligDest || this.getLig() + 1 == ligDest )
+		        (this.getLig() - 1 == ligDest || this.getLig() + 1 == ligDest )   )
 		        &&
 		        this.verifPasEchec(this, ligDest, colDest);
 	}

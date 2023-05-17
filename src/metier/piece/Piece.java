@@ -76,8 +76,8 @@ public abstract class Piece
 	public Piece estConfondu(List<Piece> lstPiece, int ligDest, int colDest)
 	{
 		for (Piece piece : lstPiece)
-		if(piece != this && piece.lig == ligDest && piece.col == colDest)
-			return piece;
+			if(piece != this && piece.lig == ligDest && piece.col == colDest)
+				return piece;
 
 		return null;
 	}
@@ -229,11 +229,7 @@ public abstract class Piece
 			for (Piece piece : metier.getLstPiece((pieceBouge.getCoul() == Piece.BLANC ? Piece.NOIR : Piece.BLANC)))
 			{
 				if(piece.simulationMouvement(monRoi.getLig(), monRoi.getCol(), lstMouvementSimule) && !(piece.lig == mouvementSimule.lig && piece.col == mouvementSimule.col))
-				{
 					return false;
-				}
-				else
-					System.out.println("type : " + piece.getSymbole() + (!(piece.lig == mouvementSimule.lig && piece.col == mouvementSimule.col)) + "\n");
 			}
 
 		return true;
