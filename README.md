@@ -4,6 +4,7 @@ Le projet porte sur un jeux d'echec en local avec un serveur sur Docker
 ## Traveaux effectué
 * Installation d'un service de jeux d'echec en ligne avec Docker
 * Développement d'un client et d'un serveur Java communicatifs
+** d
 
 ## Membres de l'équipe
 * A2 Vicente Hugo ([@VicenteHugo](https://github.com/VicenteHugo))
