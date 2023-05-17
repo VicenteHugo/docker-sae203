@@ -161,8 +161,73 @@ public class Metier
 
 		if(pieceBouge.peutDeplacer(roiMechant.getLig(), roiMechant.getCol()))
 		{
-			client.sendMessage("Le Roi " + (roiMechant.getCoul() == 1?"Noir":"Blanc") + " est en echec\n");
+			if(etMath(pieceBouge, roiMechant))
+			{
+				client.partieFini("Le joueur " + (roiMechant.getCoul() == Piece.NOIR?"Noir":"Blanc") + " a gagner");
+				client.sendMessage("Le Roi "   + (roiMechant.getCoul() == Piece.NOIR?"Noir":"Blanc") + " est en echec et mat le joureur " + (roiMechant.getCoul() == 1?"Blanc":"Noir") + " remporte la partie");
+			}
+			else
+				client.sendMessage("Le Roi " + (roiMechant.getCoul() == Piece.NOIR?"Noir":"Blanc") + " est en echec\n");
 		}
+	}
+
+	private boolean etMath(Piece pieceBouge, Piece roiMechant)
+	{
+		if(roiMechant.peutDeplacer(roiMechant.getLig() + 1, roiMechant.getCol() + 1) && estDansPlateau(roiMechant.getLig() + 1, roiMechant.getCol() + 1) ||
+		   roiMechant.peutDeplacer(roiMechant.getLig() + 1, roiMechant.getCol() - 1) && estDansPlateau(roiMechant.getLig() + 1, roiMechant.getCol() - 1) ||
+		   roiMechant.peutDeplacer(roiMechant.getLig() - 1, roiMechant.getCol() - 1) && estDansPlateau(roiMechant.getLig() - 1, roiMechant.getCol() - 1) ||
+		   roiMechant.peutDeplacer(roiMechant.getLig() - 1, roiMechant.getCol() + 1) && estDansPlateau(roiMechant.getLig() - 1, roiMechant.getCol() + 1) ||
+		   roiMechant.peutDeplacer(roiMechant.getLig() - 1, roiMechant.getCol()    ) && estDansPlateau(roiMechant.getLig() - 1, roiMechant.getCol()    ) ||
+		   roiMechant.peutDeplacer(roiMechant.getLig() + 1, roiMechant.getCol()    ) && estDansPlateau(roiMechant.getLig() + 1, roiMechant.getCol()    ) ||
+		   roiMechant.peutDeplacer(roiMechant.getLig()    , roiMechant.getCol() - 1) && estDansPlateau(roiMechant.getLig()    , roiMechant.getCol() - 1) ||
+		   roiMechant.peutDeplacer(roiMechant.getLig()    , roiMechant.getCol() + 1) && estDansPlateau(roiMechant.getLig()    , roiMechant.getCol() + 1)   )
+			return false;
+
+
+		for (int i = 0;
+		             !((pieceBouge.getLig() + i) == roiMechant.getLig() && (pieceBouge.getCol() + i) == roiMechant.getCol() ||
+		               (pieceBouge.getLig() + i) == roiMechant.getLig() && (pieceBouge.getCol() - i) == roiMechant.getCol() ||
+		               (pieceBouge.getLig() - i) == roiMechant.getLig() && (pieceBouge.getCol() + i) == roiMechant.getCol() ||
+		               (pieceBouge.getLig() - i) == roiMechant.getLig() && (pieceBouge.getCol() - i) == roiMechant.getCol()   );
+		         i++)
+		{
+			if(pieceBouge.getCoul() == Piece.BLANC)
+			for (Piece piece : lstPieceNoir)
+			{
+				if(piece.getSymbole() != 'K')
+					if(piece.peutDeplacer(pieceBouge.getLig() + i, pieceBouge.getCol() + i) ||
+					piece.peutDeplacer(pieceBouge.getLig() - i, pieceBouge.getCol() + i) ||
+					piece.peutDeplacer(pieceBouge.getLig() + i, pieceBouge.getCol() - i) ||
+					piece.peutDeplacer(pieceBouge.getLig() - i, pieceBouge.getCol() - i))
+					{
+						return false;
+					}
+			}
+		else
+			for (Piece piece : lstPieceBlanche)
+			{
+				if(piece.getSymbole() != 'K')
+					if(piece.peutDeplacer(pieceBouge.getLig() + i, pieceBouge.getCol() + i) ||
+					piece.peutDeplacer(pieceBouge.getLig() - i, pieceBouge.getCol() + i) ||
+					piece.peutDeplacer(pieceBouge.getLig() + i, pieceBouge.getCol() - i) ||
+					piece.peutDeplacer(pieceBouge.getLig() - i, pieceBouge.getCol() - i))
+					{
+						return false;
+					}
+			}
+		}
+
+		return true;
+	}
+
+	private boolean estDansPlateau(int ligDest, int colDest)
+	{
+		if(ligDest > 7 || ligDest < 0 || colDest > 7 || colDest < 0)
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	public Piece getPiece(int lig, int col)
