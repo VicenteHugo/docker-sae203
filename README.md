@@ -48,7 +48,7 @@ suivi de :
 ```shell
 ./run.sh
 ```
-- Sous *Windows*
+- Sous *Windows*  
 Lancer :
 ```shell
 run.bat
