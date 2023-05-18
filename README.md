@@ -10,7 +10,7 @@ Le projet porte sur un jeux d'echec en local avec un serveur sur Docker
 
 ## Membres de l'équipe
 * A2 Vicente Hugo ([@VicenteHugo](https://github.com/VicenteHugo))
-* A1 Gouraux Tom ([@GourauxTom](https://www.youtube.com/shorts/msRSJN5sVEs))
+* A1 Gouraux Tom ([@GourauxTom](https://github.com/TomGoureau))
 * A1 Dunet Tom ([@DunetTom](https://github.com/Oridoshi))
 
 ## Les Différent lien pour le projet
