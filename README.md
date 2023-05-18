@@ -39,7 +39,7 @@ cd docker-sae203/
 ```
 
 3. Compilation / Execution
-    - Sous *Linux*
+- Sous *Linux*  
 Commencer par faire :
 ```shell
 chmod +x run.sh
@@ -48,8 +48,7 @@ suivi de :
 ```shell
 ./run.sh
 ```
-
-    - Sous *Windows*
+- Sous *Windows*
 ```shell
 run.bat
 ```
