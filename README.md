@@ -28,7 +28,7 @@ docker run -d -p 8000:8000 echec
 La console devrait prévenir que le serveur est démarré.
 
 ### Client
-Cloner le dépôt (si cela na pas déjà était fait) : 
+1. Cloner le dépôt (si cela na pas déjà était fait) : 
 ```shell
 git clone git@github.com:VicenteHugo/docker-sae203.git
 ```
