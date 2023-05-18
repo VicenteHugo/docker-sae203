@@ -4,7 +4,9 @@
 
 ## ⚙️ Instalation
 ### Serveur
-efouvhqdlivn
+```shell
+git clone git@github.com:VicenteHugo/docker-sae203.git
+```
 ### Client
 
 
