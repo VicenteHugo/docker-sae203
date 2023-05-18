@@ -4,17 +4,52 @@
 
 ## ⚙️ Instalation
 ### Serveur
+
+- Cloner le dépôt (si cela na pas déjà était fait) : 
 ```shell
 git clone git@github.com:VicenteHugo/docker-sae203.git
 ```
+
+- Se déplacer dans le dossier 
+```shell
+cd docker-sae203
+```
+
+- Construire le conteneur :
+```shell
+docker build -t echec .
+```
+
+- Lancer le service :
+```shell
+docker run -d -p 8000:8000 echec
+```
+
+La console devrait prévenir que le serveur est démarré.
+
 ### Client
+Cloner le dépôt (si cela na pas déjà était fait) : 
+```shell
+git clone git@github.com:VicenteHugo/docker-sae203.git
+```
 
+2. Se déplacer dans le dossier 
+```shell
+cd docker-sae203/
+```
 
-## Membres de l'équipe
-* A2 Vicente Hugo ([@VicenteHugo](https://github.com/VicenteHugo))
-* A1 Gouraux Tom ([@GourauxTom](https://github.com/TomGoureau))
-* A1 Dunet Tom ([@DunetTom](https://github.com/Oridoshi))
+3. Compilation / Execution
+    - Sous *Linux*
+```shell
+chmod +x run.sh
+```
 
-## Les Différent lien pour le projet
-* [Site Web](https://www.youtube.com/watch?v=sU27pkw21nk&list=PLWmL9Ldoef0sjXKXSgcsx0WA1uhbqlGip&index=2)
-* [Dépôt](https://github.com/VicenteHugo/echec)
+```shell
+./run.sh
+```
+    - Sous *Windows*
+```shell
+run.bat
+```
+
+## 💻 Utilisation
