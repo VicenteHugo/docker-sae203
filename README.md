@@ -43,11 +43,10 @@ cd docker-sae203/
 ```shell
 chmod +x run.sh
 ```
-
 ```shell
 ./run.sh
 ```
-    - Sous *Windows*
+   - Sous *Windows*
 ```shell
 run.bat
 ```
