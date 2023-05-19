@@ -184,7 +184,11 @@ public class ClientToServer extends Thread
 					this.ctrl.terminer();
 
 				if(command.equals("setPeutDeplacer"))
-					this.ctrl.getMetier().setPeutJouer((boolean) (ois.readObject()));
+				{
+					boolean peutJouer = (boolean) (ois.readObject());
+					System.out.println(peutJouer);
+					this.ctrl.getMetier().setPeutJouer(peutJouer);
+				}
 			}
 			catch (Exception e){e.printStackTrace();this.ctrl.terminer();}
 		}
@@ -192,6 +196,7 @@ public class ClientToServer extends Thread
 
 	public void getPeutDeplacer()
 	{
+		System.out.println("test");
 		try 
 		{
 			oos.reset();

@@ -109,7 +109,7 @@ public class Metier
 		p.deplacer(ligDest, colDest, mange);
 	}
 
-	public void setPeutJouer(boolean peutJouer){this.peutJouer = peutJouer;}
+	public void setPeutJouer(boolean peutJouer){System.out.println(peutJouer); this.peutJouer = peutJouer;}
 
 	public void deplacer(int ligDep, int colDep, int ligDest, int colDest)
 	{

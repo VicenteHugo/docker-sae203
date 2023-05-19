@@ -32,6 +32,12 @@ public class Server extends Thread
 		catch (Exception e){e.printStackTrace();}
 	}
 
+	public void setPeutDeplacer()
+	{
+		for (ServerToClient serverToClient : lstServerToClient)
+			serverToClient.setPeutDeplacer(Server.nbJoueur >= 2);
+	}
+
 	public void disconnect()
 	{
 		this.lstServerToClient.get(0).disconnect();
