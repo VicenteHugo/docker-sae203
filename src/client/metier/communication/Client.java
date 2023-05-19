@@ -61,4 +61,9 @@ public class Client
 	{
 		this.clientToServer.sendMessage(mess);
 	}
+
+	public void partieFini(String messFinPartie)
+	{
+		clientToServer.partieFini(messFinPartie);
+	}
 }

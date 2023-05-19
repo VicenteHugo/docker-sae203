@@ -76,8 +76,8 @@ public abstract class Piece
 	public Piece estConfondu(List<Piece> lstPiece, int ligDest, int colDest)
 	{
 		for (Piece piece : lstPiece)
-		if(piece != this && piece.lig == ligDest && piece.col == colDest)
-			return piece;
+			if(piece != this && piece.lig == ligDest && piece.col == colDest)
+				return piece;
 
 		return null;
 	}
@@ -152,7 +152,6 @@ public abstract class Piece
 					if (p.lig == cptLig && p.col == cptCol)
 						return true;
 			}
-
 		}
 
 		return false;
@@ -204,44 +203,33 @@ public abstract class Piece
 		Piece monRoi = null;
 		List<Piece> lstMouvementSimule = new ArrayList<Piece>();
 
-		if(pieceBouge.getCoul() == Piece.BLANC)
-			for (Piece piece : metier.getLstPiece(Piece.BLANC))
-			{
-				if(piece != pieceBouge)
-					lstMouvementSimule.add(piece);
+		for (Piece piece : metier.getLstPiece(pieceBouge.getCoul()))
+		{
+			if(piece != pieceBouge)
+				lstMouvementSimule.add(piece);
 
-				if(piece.getSymbole() == 'K')
-					monRoi = piece;
-			}
-		else
-			for (Piece piece : metier.getLstPiece(Piece.NOIR))
-			{
-				if(piece != pieceBouge)
-					lstMouvementSimule.add(piece);
-
-				if(piece.getSymbole() == 'K')
-						monRoi = piece;
-			}
+			if(piece.getSymbole() == 'K')
+				monRoi = piece;
+		}
 
 		Piece mouvementSimule = new Pion(ligDest, colDest, pieceBouge.getCoul());
 		lstMouvementSimule.add(mouvementSimule);
 
 
-		if(pieceBouge.getCoul() == Piece.BLANC)
-			for (Piece piece : metier.getLstPiece(Piece.NOIR))
+		if(pieceBouge.getSymbole() == 'K')
+			for (Piece piece : metier.getLstPiece((pieceBouge.getCoul() == Piece.BLANC ? Piece.NOIR : Piece.BLANC)))
 			{
-				if(piece.simulationMouvement(monRoi.getLig(), monRoi.getCol(), lstMouvementSimule) && piece.lig != mouvementSimule.lig && piece.col != mouvementSimule.col)
+				if(piece.simulationMouvement(ligDest, colDest, lstMouvementSimule) && !(piece.lig == mouvementSimule.lig && piece.col == mouvementSimule.col))
 				{
 					return false;
 				}
 			}
+//si autre chose que roi est bouger
 		else
-			for (Piece piece : metier.getLstPiece(Piece.BLANC))
+			for (Piece piece : metier.getLstPiece((pieceBouge.getCoul() == Piece.BLANC ? Piece.NOIR : Piece.BLANC)))
 			{
-				if(piece.simulationMouvement(monRoi.getLig(), monRoi.getCol(), lstMouvementSimule) && piece.lig != mouvementSimule.lig && piece.col != mouvementSimule.col)
-				{
+				if(piece.simulationMouvement(monRoi.getLig(), monRoi.getCol(), lstMouvementSimule) && !(piece.lig == mouvementSimule.lig && piece.col == mouvementSimule.col))
 					return false;
-				}
 			}
 
 		return true;

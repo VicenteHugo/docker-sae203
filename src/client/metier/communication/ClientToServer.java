@@ -216,4 +216,9 @@ public class ClientToServer extends Thread
 		}
 		catch (Exception e){e.printStackTrace();}
 	}
+
+	public void partieFini(String messFinPartie)
+	{
+		//clientToServer.partieFini(messFinPartie);
+	}
 }
