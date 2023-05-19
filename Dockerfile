@@ -2,7 +2,7 @@ FROM debian:latest
 
 # Installation de Java, X11 et Xvfb
 RUN apt-get update && \
-    apt-get install -y openjdk-17-jdk
+    apt-get install -y openjdk-17-jdk coreutils
 
 # Copie des fichiers
 COPY ./src/server /echec/server
@@ -15,5 +15,5 @@ RUN chmod +x /echec/server/startServer.sh
 
 EXPOSE 6666
 
-# Lancement du serveur X11
-CMD ["./echec/server/startServer.sh"]
+# Lancement du serveur
+CMD bash -c "cd /echec/server/ && javac *.java && java Controleur"
