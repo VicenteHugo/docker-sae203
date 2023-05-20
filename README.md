@@ -6,8 +6,8 @@ Notre projet est de créer un jeu d'échec en réseau où 2 personnes peuvent s'
 Les joueurs peuvent discuter sur un tchat avec les personnes qui regarde la partie.  
 1. Pour se faire, nous avons commencer par créer les différentes pièces et leur contraintes de déplacement.
 2. Ensuite, nous avons créer un serveur sur un conteneur docker, pour que les joueurs se connectent et jouent en simultané sur le même plateau.
-3. Il ne nous restait plus qu'a détecter les situations d'échec ou d'échec et math. pour finir, 
-4. nous avons créer un tchat sur le serveur pour que les joueurs puissent discuter.
+3. Il ne nous restait plus qu'a détecter les situations d'échec ou d'échec et math.
+4. Pour finir, nous avons créer un tchat sur le serveur pour que les joueurs puissent discuter.
 
 ## ⚙️ Instalation
 ### Serveur
