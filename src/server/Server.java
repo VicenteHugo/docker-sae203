@@ -34,6 +34,7 @@ public class Server extends Thread
 
 	public void setPeutDeplacer()
 	{
+		System.out.println(Server.nbJoueur);
 		for (ServerToClient serverToClient : lstServerToClient)
 			serverToClient.setPeutDeplacer(Server.nbJoueur >= 2);
 	}
@@ -58,6 +59,7 @@ public class Server extends Thread
 				ServerToClient serverToClient = new ServerToClient(this, socket);
 				
 				this.lstServerToClient.add(serverToClient);
+				Server.nbJoueur++;
 				serverToClient.start();	
 			} catch (Exception e) {e.printStackTrace();}
 		}

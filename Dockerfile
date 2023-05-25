@@ -11,9 +11,7 @@ COPY ./src/server /echec/server
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 ENV PATH=$JAVA_HOME/bin:$PATH
 
-RUN chmod +x /echec/server/startServer.sh
-
 EXPOSE 6666
 
-# Lancement du serveur X11
-CMD ["./echec/server/startServer.sh"]
+# Lancement du serveur
+CMD bash -c "cd /echec/server/ && javac *.java && java Controleur"
