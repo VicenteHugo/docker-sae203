@@ -78,7 +78,7 @@ si c'est sur votre ordinateur connecter vous en utilisant local host comme ceci 
  ![Texte alternatif](/imageREADME/connectPanel.png "Titre de l'image")
   
 1. si vous ête sur un autre ordinateur pour commencer vérifier que vous soyer sous la même connection  
-2. suite a la personne que vas host le serveur doit aller chercher sont ordinateur pour ce fair il doit faire ouvrir un terminal, puis faire ifconfig et trouver l'ip du pc
+2. après que la personne host, host le serveur celle-ci doit aller chercher sont IP pour ce fair il doit faire ouvrir cmd, puis faire ipconfig et trouver l'ip du pc
 3. en suite a la place de mettre localhost metter l'ip de l'ordianteur host
 
 
@@ -91,5 +91,5 @@ si c'est sur votre ordinateur connecter vous en utilisant local host comme ceci 
  ![Texte alternatif](/imageREADME/connectPanel.png "Titre de l'image")
   
 1. si vous ête sur un autre ordinateur pour commencer vérifier que vous soyer sous la même connection  
-2. suite a la personne que vas host le serveur doit aller chercher sont ordinateur pour ce fair il doit faire ouvrir cmd, puis faire ipconfig et trouver l'ip du pc
-3. en suite a la place de mettre localhost metter l'ip de l'ordianteur host
+2. après que la personne host, host le serveur celle-ci doit aller chercher sont IP pour ce fair il doit faire ouvrir cmd, puis faire ipconfig et trouver l'ip du pc
+3. en suite a la place de mettre localhost metter l'ip de l'ordinateur host
