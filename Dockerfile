@@ -2,7 +2,7 @@ FROM debian:latest
 
 # Installation de Java, X11 et Xvfb
 RUN apt-get update && \
-    apt-get install -y openjdk-17-jdk
+    apt-get install -y openjdk-17-jdk coreutils
 
 # Copie des fichiers
 COPY ./src/server /echec/server
