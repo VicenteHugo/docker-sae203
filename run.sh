@@ -36,16 +36,16 @@ ajoutFichiers()
 #-----------------------------------------#
 verificationDossier()
 {
-    source="$1"          
-    until [ -d $source ]  
-    do
-        read -p "Veuillez entrez le dossier racine à partir du quel la compile.list vas être générer : " source
-    done
+    # source="$1"          
+    # until [ -d $source ]  
+    # do
+    #     read -p "Veuillez entrez le dossier racine à partir du quel la compile.list vas être générer : " source
+    # done
 
-    if [ -z $source ]   
-    then 
+    # if [ -z $source ]   
+    # then 
         source="."
-    fi
+    # fi
 
 
     > ./compile.list   
