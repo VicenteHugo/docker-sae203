@@ -42,6 +42,7 @@ public class Server extends Thread
 	public void disconnect()
 	{
 		this.lstServerToClient.get(0).disconnect();
+		Server.nbJoueur--;
 	}
 
 	public int getNbDeplacement(){return this.nbDeplacement;}
