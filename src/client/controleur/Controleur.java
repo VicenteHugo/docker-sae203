@@ -105,6 +105,7 @@ public class Controleur
 	public void fermer()
 	{
 		this.metier.fermer();
+		this.terminer();
 	}
 
 	public void maj(String pseudo1, String pseudo2)
