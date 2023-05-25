@@ -10,7 +10,7 @@ IF NOT EXIST ".\bin\donnees\" ( mkdir ".\bin\donnees\" )
 XCOPY ".\donnees" ".\bin\donnees" /E /Y >NUL
 
 echo Compilation...
-call javac -encoding utf8 -d ".\bin" "@compile.list" && ( echo Lancement du programme... & call java -cp "%CLASSPATH%;.\bin;.\bin\donnees\libraries\ihmgui.jar" controleur.Controleur && echo Fin de l'execution. || ( echo. & echo Erreur d'EXECUTION. )) || echo Erreur de COMPILATION.
+call javac -encoding utf8 -d ".\bin" "@compile.list" && ( echo Lancement du programme... & call java -cp "%CLASSPATH%;.\bin" controleur.Controleur && echo Fin de l'execution. || ( echo. & echo Erreur d'EXECUTION. )) || echo Erreur de COMPILATION.
 
 goto :eof
 
